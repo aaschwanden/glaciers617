@@ -1,0 +1,181 @@
+
+\documentclass[notes=hide]{beamer}
+
+
+\mode<presentation>
+{
+  \usetheme[headline,footline]{ARSC}
+  \setbeamercovered{transparent}
+}
+
+% load packages
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{multimedia}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+%\usepackage{hyperref}
+\usepackage{booktabs,pgf,verbatim}
+\usepackage{springervector}
+\bibliographystyle{chicago}
+
+
+% NOTE:
+% Instead of pgf, you can also use the familiar \includegraphics commad
+
+
+
+
+
+% title page
+\title[Glacier Dynamics] % (optional, use only with long paper titles)
+{Glacier Mechanics and Thermodynamics}
+
+
+
+\author[Aschwanden] % (optional, use only with lots of authors)
+{Andy Aschwanden}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[ARSC] % (optional, but mostly needed)
+{
+  %
+  Arctic Region Supercomputing Center\\
+  University of Alaska Fairbanks, USA
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+
+
+
+\subject{Development}
+
+% define what is shown at the beginning of each section
+\AtBeginSection[]
+{
+ \begin{frame}<beamer>
+   \frametitle{Outline}
+   \tableofcontents[currentsection,subsectionstyle=hide/show/hide]
+ \end{frame}
+}
+
+% define what is shown at the beginning of each subsection
+\AtBeginSubsection[]
+{
+ \begin{frame}<beamer>
+  \frametitle{Outline}
+   \tableofcontents[currentsection,currentsubsection]
+ \end{frame}
+}
+
+\begin{document}
+
+% insert titlepage
+\begin{frame}
+  \titlepage
+  \note[item]{Good afternoon everybody and welcome to my presentation "NumMod of GlacFlow".}
+  \note[item]{My name is Andy Aschwanden and I'm a PhD student of H. Blatter at IAC, working on glacier mechanics and dynamics}
+  \note[item]{in the next 15 minutes, I'll present how I'm using CMP to model glacier flow and how it has change my scientific life}
+\end{frame}
+
+% insert TOC
+\begin{frame}
+ \frametitle{Outline}
+ \tableofcontents[subsectionstyle=hide]
+  %You might wish to add the option [pausesections]
+  \note[item]{I've divided my talk into 4 sections...}
+\end{frame}
+
+
+
+\section{Introduction}
+
+
+
+\begin{frame}
+  \frametitle{What is a glacier?}
+  \begin{itemize}[<+- | alert@+>] % some control parameters
+    \item for artists, tourists: beautiful landscape
+    \item Geographers: element of landscape
+    \item Geologists: soft rock, sediment
+    \item Hydrologists: water reservoir
+    \item Climatologists: subsystem of climate system, climate archive
+    \item Physicists: thermomechanical non-Newtonian fluid
+    \item Mathematicians: free boundary problem in fluid dynamics
+    \item Electric engineers: one sided accessible dielectricum
+    \item Glaciologists: glacier
+  \end{itemize} 
+\end{frame}
+
+\subsection{Basics}
+
+\begin{frame}
+  \frametitle{Glaciers for glaciologists}
+  \vspace{-.1cm}
+  Glacier ice: incompressible, heat-conducting non-Newtonian fluid
+  \vspace{.1cm}
+  \small{
+  \begin{columns}
+  \column[T]{6cm}
+  Mass conservation
+  \begin{displaymath}
+  \nabla \cdot \vec v =  0
+  \end{displaymath}
+  Stokes equation
+  \begin{displaymath}
+  \nabla \cdot \left( -p\vec{\mathrm I} + 2\eta \vec {\mathrm D}\right) = \rho \vec g
+  \end{displaymath}
+  Temperature equation
+  \begin{displaymath}
+  \nabla \cdot \left(-k\nabla T\right) + \rho c_p \vec v \cdot \nabla T = 0
+  \end{displaymath}
+    Viscosity
+  \begin{displaymath}
+  \eta = \eta\left(T,\omega,\dot \varepsilon_{eff},\ldots \right)
+  \end{displaymath}
+  \column[T]{5cm}
+    \small
+    \begin{table}
+    \begin{tabular}{ll}
+      $\vec v$ & velocity \\
+      $p$ & pressure \\
+      $\rho$&  density of ice \\
+      $\vec g$ & acceleration due to gravity \\
+      $\vec {\mathrm I}$ & identity tensor \\
+      $T$ & temperature \\
+      $k$ & diffusivity of ice \\
+      $c_p$ & heat capacity of ice \\
+      $\eta$ & viscosity of ice \\
+      $\omega$ & water content \\
+      $\vec {\mathrm D}$ & $=\frac{1}{2}\left( \nabla \vec v + \nabla \vec v^{T}\right)$\\
+      $\dot \varepsilon_{eff}$ & $=\left(\frac{1}{2}\mathrm{tr} \left(\vec {\mathrm D^T}\vec {\mathrm D}\right)\right)^{1/2}$\\
+      & effective strain rate
+    \end{tabular}
+  \end{table}
+  \end{columns}
+  }
+  \note[item]{obeys mass conservation and Stokes flow}
+  \note[item]{not going into detail}
+  \note[item]{viscosity depends on \ldots}
+  \note[item]{non-linear relationship}  
+\end{frame}
+
+
+
+% \begin{frame}
+% \frametitle{Glaciers are multiphysics pure}
+%   \begin{figure}
+%     {\pgfuseimage<1>{mp_energy}}%
+%     {\pgfuseimage<2>{mp_hydro}}%
+%     {\pgfuseimage<3>{mp}}%
+%   \end{figure}
+% \end{frame}
+
+
+
+\end{document}
+
+
