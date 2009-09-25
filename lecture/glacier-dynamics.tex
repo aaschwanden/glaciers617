@@ -1,23 +1,22 @@
 
-\documentclass[notes=hide]{beamer}
+\documentclass[hide notes,intlimits]{beamer}
 
 
 \mode<presentation>
 {
-  \usetheme[headline,footline]{ARSC}
+  \usetheme[headline,footline]{UAFshade}
   \setbeamercovered{transparent}
 }
 
 % load packages
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{multimedia}
 \usepackage{lmodern}
-\usepackage[T1]{fontenc}
+\usepackage[amssymb]{SIunits}
 %\usepackage{hyperref}
-\usepackage{booktabs,pgf,verbatim}
-\usepackage{springervector}
-\bibliographystyle{chicago}
+\bibliographystyle{andy}
 
 
 % NOTE:
@@ -29,8 +28,8 @@
 
 % title page
 \title[Glacier Dynamics] % (optional, use only with long paper titles)
-{Glacier Mechanics and Thermodynamics}
-
+{Mechanics and Thermodynamics of Glaciers}
+\subtitle{Glaciers 617}
 
 
 \author[Aschwanden] % (optional, use only with lots of authors)
@@ -51,7 +50,7 @@
 
 
 
-\subject{Development}
+\subject{Glaciers}
 
 % define what is shown at the beginning of each section
 \AtBeginSection[]
@@ -76,9 +75,6 @@
 % insert titlepage
 \begin{frame}
   \titlepage
-  \note[item]{Good afternoon everybody and welcome to my presentation "NumMod of GlacFlow".}
-  \note[item]{My name is Andy Aschwanden and I'm a PhD student of H. Blatter at IAC, working on glacier mechanics and dynamics}
-  \note[item]{in the next 15 minutes, I'll present how I'm using CMP to model glacier flow and how it has change my scientific life}
 \end{frame}
 
 % insert TOC
@@ -86,95 +82,268 @@
  \frametitle{Outline}
  \tableofcontents[subsectionstyle=hide]
   %You might wish to add the option [pausesections]
-  \note[item]{I've divided my talk into 4 sections...}
 \end{frame}
-
-
 
 \section{Introduction}
 
 
-
 \begin{frame}
-  \frametitle{What is a glacier?}
-  \begin{itemize}[<+- | alert@+>] % some control parameters
-    \item for artists, tourists: beautiful landscape
-    \item Geographers: element of landscape
-    \item Geologists: soft rock, sediment
-    \item Hydrologists: water reservoir
-    \item Climatologists: subsystem of climate system, climate archive
-    \item Physicists: thermomechanical non-Newtonian fluid
-    \item Mathematicians: free boundary problem in fluid dynamics
-    \item Electric engineers: one sided accessible dielectricum
-    \item Glaciologists: glacier
-  \end{itemize} 
+  \frametitle{Recall from Vector Calculus}
+  \begin{block}{Divergence Theorem}
+    \begin{equation}
+      \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
+      \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
+    \end{equation}
+  \end{block}
+  \begin{block}{Reynolds Tranport Theorem}
+    \begin{equation}
+     \frac{\text{d}}{\text{d} t}\int_{\omega} \boldsymbol{\phi}\, \text{d} v =
+     \int_{\omega} \frac{\partial \boldsymbol{\phi}}{\partial{t}} \, \text{d} v +
+      \oint_{\partial \omega} \boldsymbol{\phi} \mathbf{v}\cdot\mathbf{n}\,\text{d}a 
+    \end{equation}
+  \end{block}
 \end{frame}
 
-\subsection{Basics}
 
 \begin{frame}
-  \frametitle{Glaciers for glaciologists}
-  \vspace{-.1cm}
-  Glacier ice: incompressible, heat-conducting non-Newtonian fluid
-  \vspace{.1cm}
-  \small{
-  \begin{columns}
-  \column[T]{6cm}
-  Mass conservation
-  \begin{displaymath}
-  \nabla \cdot \vec v =  0
-  \end{displaymath}
-  Stokes equation
-  \begin{displaymath}
-  \nabla \cdot \left( -p\vec{\mathrm I} + 2\eta \vec {\mathrm D}\right) = \rho \vec g
-  \end{displaymath}
-  Temperature equation
-  \begin{displaymath}
-  \nabla \cdot \left(-k\nabla T\right) + \rho c_p \vec v \cdot \nabla T = 0
-  \end{displaymath}
-    Viscosity
-  \begin{displaymath}
-  \eta = \eta\left(T,\omega,\dot \varepsilon_{eff},\ldots \right)
-  \end{displaymath}
-  \column[T]{5cm}
-    \small
-    \begin{table}
-    \begin{tabular}{ll}
-      $\vec v$ & velocity \\
-      $p$ & pressure \\
-      $\rho$&  density of ice \\
-      $\vec g$ & acceleration due to gravity \\
-      $\vec {\mathrm I}$ & identity tensor \\
-      $T$ & temperature \\
-      $k$ & diffusivity of ice \\
-      $c_p$ & heat capacity of ice \\
-      $\eta$ & viscosity of ice \\
-      $\omega$ & water content \\
-      $\vec {\mathrm D}$ & $=\frac{1}{2}\left( \nabla \vec v + \nabla \vec v^{T}\right)$\\
-      $\dot \varepsilon_{eff}$ & $=\left(\frac{1}{2}\mathrm{tr} \left(\vec {\mathrm D^T}\vec {\mathrm D}\right)\right)^{1/2}$\\
-      & effective strain rate
-    \end{tabular}
-  \end{table}
-  \end{columns}
+  \frametitle{My Favorite Reference}
+  Greve,~R., and H.~Blatter: Dynamics of Ice Sheets and Glaciers. Springer, 2009.
+  \begin{itemize}
+    \item notation follows closely
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Why}
+  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
+\end{frame}
+
+{
+\setbeamertemplate{headline}[default]
+\begin{frame}
+  \frametitle{Why}
+  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
+\end{frame}
+}   
+
+\begin{frame}
+  \frametitle{Concepts}
+ \begin{itemize}
+    \item material objectivity
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Questions}
+  \centering{
+    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
   }
-  \note[item]{obeys mass conservation and Stokes flow}
-  \note[item]{not going into detail}
-  \note[item]{viscosity depends on \ldots}
-  \note[item]{non-linear relationship}  
+ \begin{itemize}
+    \item What determines the glacier shape and extend
+    \item How do ablation, accumulation, ice temperature, and the bedrock topography influence the flow of a glacier
+    \item How does the flow speed vary with depth, along a flowline, or orthogonal to a flowline
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Questions}
+  \centering{
+    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
+  }
+ \begin{block}{The two major problems}
+   \begin{enumerate}
+   \item Given the boundary conditions,
+     \begin{itemize}
+     \item basal topography
+     \item accumulation-ablation function
+     \item temperature at the upper ice surface
+     \item geothermal heat flux at the base,
+   \end{itemize}
+   which glacier (geometry) is in equilibrium for given bc's.
+  \item How does the glacier respond to changes in the bc's?
+\end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Answer}
+  \centering{
+    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
+  }
+
+ \begin{block}{Solution: Continuums Mechanics}
+   Solve balance equations for
+ \begin{itemize}
+    \item mass
+    \item linear and angular momentum
+    \item energy
+    \item (forget about entropy)
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Balance Equations}
+
+\begin{frame}
+  \frametitle{General Balance Equations}
+  \begin{equation*}
+   \frac{\partial g}{\partial t} = - \nabla \cdot \left(\boldsymbol{\phi} + g\mathbf{v}\right) + p + s
+ \end{equation*}
+ \begin{columns}
+   \column[C]{0.1cm}
+   $g$ \\
+   $\boldsymbol{\phi}$ \\
+   $p$ \\
+   $s$ \\
+   \column[C]{6cm}
+   physical quantity \\
+   flux of $g$ through the boundary \\
+   production of $g$ \\
+   supply of $g$
+ \end{columns}
 \end{frame}
 
 
+\begin{frame}
+  \frametitle{Balance Equations}
+  \large{
+  \begin{equation*}
+  \begin{array}{lcclc}
+    \text{mass} \quad &  \frac{\text{d} \rho}{\text{d} t} & = & -\rho\nabla \cdot \mathbf{v} \quad & (1)\\[.25em]
+    \text{momentum} \quad & \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} - \mathbf{f} \quad & (3) \\[.25em]
+    \text{internal energy} \quad & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) \quad & (1)
+  \end{array}
+  \end{equation*}
+  }
+\centering{
+ \begin{columns}
+   \column[T]{4cm} \centering{
+   left-hand side \\
+   $\rho$ (1)\\
+   $\mathbf{v}$ (3)\\
+   $u$ (1)
+   }
+   \column[T]{4cm} \centering{
+   right-hand side \\
+   $\mathbf{T}$ (6)\\
+   $\mathbf{q}$ (3)
+  }
+ \end{columns}
+  }
+  \begin{itemize}
+   \item so we have 5 equations for 14 unknown fields
+   \item the system is highly under-determined
+   \item[$\Rightarrow$] \alert{closure relations} required
+ \end{itemize}
+\end{frame}
 
-% \begin{frame}
-% \frametitle{Glaciers are multiphysics pure}
-%   \begin{figure}
-%     {\pgfuseimage<1>{mp_energy}}%
-%     {\pgfuseimage<2>{mp_hydro}}%
-%     {\pgfuseimage<3>{mp}}%
-%   \end{figure}
-% \end{frame}
+\begin{frame}
+  \frametitle{Closure Relations}
+  \begin{itemize}
+    \item \alert{balance equations} are universally valid
+    \item \alert{closure relations} describe the specific behavior of a material
+    \item \alert{closure relations} are often called \alert{constitutive equations}
+  \end{itemize}
+\end{frame}
 
 
+\begin{frame}
+  \frametitle{Balance Equations for Glaciers}
+  \large{
+  \begin{equation*}
+  \begin{array}{lcclc}
+    \text{mass} &  \nabla \cdot \mathbf{v} & = & 0 \quad & (3)\\
+    \text{momentum} & \nabla \cdot \mathbf{T} & = & - \rho \mathbf{g} \quad & (3)\\
+    \text{internal energy} & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) \quad & (1)
+  \end{array}
+  \end{equation*}
+  }
+\centering{
+ \begin{columns}
+   \column[T]{4cm} \centering{
+   left-hand side \\
+   $\mathbf{v}$ (3)\\
+   $\mathbf{T}$ (6)\\
+   $u$ (1)
+   }
+   \column[T]{4cm} \centering{
+   right-hand side \\
+  $\mathbf{q}$ (3)
+  }
+ \end{columns}
+  }
+  \begin{itemize}
+   \item so we have 7 equations for 13 unknown fields
+   \item the system is highly under-determined
+   \item[$\Rightarrow$] \alert{closure relations} required
+ \end{itemize}
+\end{frame}
+
+\section{Constitutive Equations}
+
+\begin{frame}
+  \frametitle{Constitutive Equations for Glaciers}
+  \begin{itemize}
+    \item for the heat flux $\mathbf{q}$
+    \item for the viscosity $\eta$
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Constitutive Equations for Glaciers}
+  \begin{itemize}
+    \item ask a material scientist or rheologist
+    \item and let him/her do some fancy experiments
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Constitutive Equations for Glaciers}
+  From experiments, you will learn that ice behaves like a
+  \begin{itemize}
+    \item viscous
+    \item non-Newtionian
+    \item heat-conduction
+ \end{itemize}
+fluid. So what does this mean?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Constitutive Equations for Glaciers}
+  \begin{block}{Viscous material}
+ \begin{itemize}
+    \item deformation rate $\propto$ stress
+\end{itemize}
+ \end{block}
+  \begin{block}{Non-Newtonian fluid}
+ \begin{itemize}
+    \item non-linear relationship between deformation rate and stress
+\end{itemize}
+ \end{block}
+\end{frame}
+
+\section{Glaciers and Ice Sheets}
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  Some typical values
+  \begin{equation*}
+  \begin{array}{rccl}
+    \text{horizontal extend} &  [L] & = & \unit{1000}\kilo\meter\\
+    \text{vertical extend} & [H] & = & \unit{1}\kilo\meter \\
+    \text{horizontal velocity} & [U] & = & \unit{100}\meter\power{a}{-1}\\
+    \text{vertical velocity} & [W] & = & \unit{0.1}\meter\power{a}{-1}\\
+    \text{pressure} & [U] & = & \rho g[H] = \unit{10}\mega\pascal\\
+    \text{time-scale} & [T] & = &[L]/[U] = 10^{4}\usk\power{a}{1}\\
+  \end{array}
+  \end{equation*}
+  The aspect ratio $\epsilon$ is defined as
+  \begin{equation*}
+    \epsilon = \frac{[H]}{[L]} = \frac{[U]}{[W]} = 10^{-3} \text{ for an ice sheet}
+  \end{equation*}
+\end{frame}
 
 \end{document}
 
