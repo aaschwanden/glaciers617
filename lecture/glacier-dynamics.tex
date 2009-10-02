@@ -16,14 +16,8 @@
 \usepackage{lmodern}
 \usepackage[amssymb]{SIunits}
 %\usepackage{hyperref}
+\usepackage{natbib}
 \bibliographystyle{andy}
-
-
-% NOTE:
-% Instead of pgf, you can also use the familiar \includegraphics commad
-
-
-
 
 
 % title page
@@ -106,11 +100,13 @@
 
 
 \begin{frame}
-  \frametitle{My Favorite Reference}
-  Greve,~R., and H.~Blatter: Dynamics of Ice Sheets and Glaciers. Springer, 2009.
+  \frametitle{Course Material}
   \begin{itemize}
-    \item notation follows closely
+    \item notation follows closely \cite{GreveBlatter_disg}
+    \item Chapter~3\,--\,5
   \end{itemize}
+  \def\newblock{}
+  \bibliography{cryo}
 \end{frame}
 
 
@@ -119,13 +115,13 @@
   The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
 \end{frame}
 
-{
-\setbeamertemplate{headline}[default]
-\begin{frame}
-  \frametitle{Why}
-  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
-\end{frame}
-}   
+%{
+%\setbeamertemplate{headline}[default]
+%\begin{frame}
+%  \frametitle{Why}
+%  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
+%\end{frame}
+%}   
 
 \begin{frame}
   \frametitle{Concepts}
@@ -172,16 +168,20 @@
     \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
   }
 
- \begin{block}{Solution: Continuums Mechanics}
-   Solve balance equations for
- \begin{itemize}
-    \item mass
-    \item linear and angular momentum
-    \item energy
-    \item (forget about entropy)
-    \end{itemize}
-  \end{block}
+ \begin{block}{Solution: Continuums Mechanics \& Rheology}
+   \begin{itemize}
+     \item Solve balance equations for
+       \begin{itemize}
+       \item mass
+       \item linear and angular momentum
+       \item energy
+       \item (forget about entropy)
+       \end{itemize}
+     \item Define constitutive equations
+  \end{itemize}
+\end{block}
 \end{frame}
+
 
 \section{Balance Equations}
 
@@ -238,6 +238,7 @@
  \end{itemize}
 \end{frame}
 
+
 \begin{frame}
   \frametitle{Closure Relations}
   \begin{itemize}
@@ -280,6 +281,7 @@
  \end{itemize}
 \end{frame}
 
+
 \section{Constitutive Equations}
 
 \begin{frame}
@@ -299,6 +301,7 @@
  \end{itemize}
 \end{frame}
 
+
 \begin{frame}
   \frametitle{Constitutive Equations for Glaciers}
   From experiments, you will learn that ice behaves like a
@@ -309,6 +312,7 @@
  \end{itemize}
 fluid. So what does this mean?
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Constitutive Equations for Glaciers}
@@ -324,11 +328,26 @@ fluid. So what does this mean?
  \end{block}
 \end{frame}
 
-\section{Glaciers and Ice Sheets}
+
+\section{Glaciers}
+
+
+\subsection{Balance Equations}
 
 \begin{frame}
   \frametitle{Large-Scale Dynamics}
-  Some typical values
+  \begin{itemize}
+    \item Ice sheets are glaciers too!
+  \end{itemize}
+  \vskip1em
+  \centering{
+    \includegraphics[width=.75\textwidth]{figures/fig_5_01}%
+    }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  \begin{block}{Some typical values for an ice sheet}
   \begin{equation*}
   \begin{array}{rccl}
     \text{horizontal extend} &  [L] & = & \unit{1000}\kilo\meter\\
@@ -339,11 +358,98 @@ fluid. So what does this mean?
     \text{time-scale} & [T] & = &[L]/[U] = 10^{4}\usk\power{a}{1}\\
   \end{array}
   \end{equation*}
+  \end{block}
   The aspect ratio $\epsilon$ is defined as
   \begin{equation*}
     \epsilon = \frac{[H]}{[L]} = \frac{[U]}{[W]} = 10^{-3} \text{ for an ice sheet}
   \end{equation*}
+  \begin{itemize}
+    \item The scaling argument for valley glaciers is almost the same
+   \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  \begin{block}{Froude number}
+    The \alert{Froude number $Fr$} is the ratio of acceleration and pressure gradient. In the horizontal we have
+  \begin{equation*}
+    Fr = \frac{\rho[U]/[t]}{[P]/[L]} = \frac{\rho[U]^{2}/[L]}{\rho g [H]/[L]} = \frac{[U]^{2}}{g[H]} \approx 10^{-15}
+  \end{equation*}
+  and in the vertical
+  \begin{equation*}
+    Fr = \frac{\rho[W]/[t]}{[P]/[L]} = \frac{\rho[W]^{2}/[L]}{\rho g [H]/[L]} = \frac{[\epsilon U]^{2}}{g[H]} \approx 10^{-21}
+  \end{equation*}
+  $\Rightarrow$ The \alert{acceleration term} is \alert{negligible}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  \begin{block}{Rossby number}
+    The \alert{Rossby number $Ro$} is the ratio of acceleration and Coriolis force
+  \begin{equation*}
+    Ro = \frac{[U]}{\Omega [L]} \approx 2\times10^{-8}
+  \end{equation*}
+  and thus the Coriolis to pressure gradient is
+  \begin{equation*}
+   \frac{Fr}{Ro}\approx 10^{-8}
+  \end{equation*}
+  $\Rightarrow$ The \alert{Coriolis term} is also \alert{negligible}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  By neglection both the
+  \begin{itemize}
+    \item acceleration term
+    \item Coriolis term
+   \end{itemize}
+   the Navier-Stokes equation simplifies to
+ \begin{equation*}
+    \nabla p + \nabla \cdot \left(\eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)\right) = - \rho \mathbf{g}
+  \end{equation*}
+  This is called the \alert{Stoke equations}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Large-Scale Dynamics}
+  Sweet. But what does it mean?
+  Remember that 
+  \begin{equation*}\mathbf{T} =  -p\mathbf{1} + 2\eta \mathbf{D} = -p\mathbf{1} + \eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)
+  \end{equation*}
+  We can therefore write the Stokes equation also as
+ \begin{equation*}
+    \nabla \cdot \mathbf{T} = - \rho \mathbf{g}
+  \end{equation*}
+  \begin{itemize}
+    \item gravitional force exerted on the ice are balanced by stresses within the ice
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Boundary Conditions}
+
+
+\begin{frame}
+  \frametitle{Free Surface}
+  Sweet. But what does it mean?
+  Remember that 
+  \begin{equation*}\mathbf{T} =  -p\mathbf{1} + 2\eta \mathbf{D} = -p\mathbf{1} + \eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)
+  \end{equation*}
+  We can therefore write the Stokes equation also as
+ \begin{equation*}
+    \nabla \cdot \mathbf{T} = - \rho \mathbf{g}
+  \end{equation*}
+  \begin{itemize}
+    \item gravitional force exerted on the ice are balanced by stresses within the ice
+  \end{itemize}
+\end{frame}
+
 
 \end{document}
 
