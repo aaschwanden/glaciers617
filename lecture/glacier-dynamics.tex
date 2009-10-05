@@ -12,10 +12,10 @@
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{multimedia}
+\usepackage{multimedia,pgf}
 \usepackage{lmodern}
 \usepackage[amssymb]{SIunits}
-%\usepackage{hyperref}
+\usepackage{hyperref}
 \usepackage{natbib}
 \bibliographystyle{andy}
 
@@ -81,29 +81,29 @@
 \section{Introduction}
 
 
-\begin{frame}
-  \frametitle{Recall from Vector Calculus}
-  \begin{block}{Divergence Theorem}
-    \begin{equation}
-      \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
-      \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
-    \end{equation}
-  \end{block}
-  \begin{block}{Reynolds Tranport Theorem}
-    \begin{equation}
-     \frac{\text{d}}{\text{d} t}\int_{\omega} \boldsymbol{\phi}\, \text{d} v =
-     \int_{\omega} \frac{\partial \boldsymbol{\phi}}{\partial{t}} \, \text{d} v +
-      \oint_{\partial \omega} \boldsymbol{\phi} \mathbf{v}\cdot\mathbf{n}\,\text{d}a 
-    \end{equation}
-  \end{block}
-\end{frame}
+%{
+%\setbeamertemplate{headline}[default]
+%\begin{frame}
+%  \frametitle{Why}
+%  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
+%\end{frame}
+%} 
 
+\plainframe{
+  \begin{figure}
+    \pgfputat{\pgfxy(-.39,.25)}{
+    \includegraphics<1>[width=\paperwidth]{figures/gorner}%
+    \includegraphics<2>[width=\paperwidth]{figures/gorner_clarke}%    
+  }
+  \end{figure}
+}
 
 \begin{frame}
   \frametitle{Course Material}
   \begin{itemize}
     \item notation follows closely \cite{GreveBlatter_disg}
-    \item Chapter~3\,--\,5
+    \item covers Chapter~3\,--\,5.1
+    \item \url{http://www.gi.alaska.edu/~aaschwanden/lecture.html}
   \end{itemize}
   \def\newblock{}
   \bibliography{cryo}
@@ -111,29 +111,75 @@
 
 
 \begin{frame}
-  \frametitle{Why}
-  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
+  \frametitle{Observations}
+  \centering{
+    \includegraphics<1>[width=\textwidth]{figures/agassi}%
+  }
 \end{frame}
-
-%{
-%\setbeamertemplate{headline}[default]
-%\begin{frame}
-%  \frametitle{Why}
-%  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
-%\end{frame}
-%}   
 
 \begin{frame}
-  \frametitle{Concepts}
- \begin{itemize}
-    \item material objectivity
-  \end{itemize}
+  \frametitle{Observations}
+  \begin{columns}
+    \column[C]{4.25cm}
+    \includegraphics[width=4cm]{figures/geschw_prof_oberfl}%
+    \vskip1em
+    \includegraphics[width=4cm]{figures/geschw_vert_prof}%
+    \column[C]{7.75cm}
+    \begin{block}{1779 Gravitation theory by de~Saussure}
+      H.~B. de~Saussure observes sliding: 
+      \begin{itemize}
+        \item ``\ldots the weight of the ice might be sufficient to urge it down the slope of the valley, if the sliding motion were aided by the water flowing at the bottom.''
+      \end{itemize}
+    \end{block}
+ \end{columns}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Observations}
+  \begin{columns}
+    \column[C]{4.25cm}
+    \includegraphics[width=4cm]{figures/geschw_prof_oberfl}%
+    \vskip1em
+    \includegraphics[width=4cm]{figures/geschw_vert_prof}%
+    \column[C]{7.75cm}
+    \begin{block}{1840-1846 Dilatation theory by L. Agassi}
+      \begin{itemize}
+        \item glacier ice contains innumerable fissures and capillary tubes
+        \item during the day, these tubes imbibe the water
+        \item and during the night, the water freezes
+        \item this distension exertcs a force and propels the glacier in the direction of least resistance
+      \end{itemize}
+    \end{block}
+ \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Observations}
+  \begin{columns}
+    \column[C]{4.25cm}
+    \includegraphics[width=4cm]{figures/geschw_prof_oberfl}%
+    \vskip1em
+    \includegraphics[width=4cm]{figures/geschw_vert_prof}%
+    \column[C]{7.75cm}
+    \begin{block}{1864-1930 Viscous flow theory by J.~Forbes}
+      \begin{itemize}
+        \item made his own observations on Mer de Glace, France
+          \item glacier flows fastest in the center
+        \item opposes Agassi' theory, if the dilatation theory were true
+        \item then flow would be greatest at sunset
+        \item and near the glacier margins
+      \end{itemize}
+    \end{block}
+ \end{columns}
+\end{frame}
+
+ 
 \begin{frame}
   \frametitle{Questions}
   \centering{
-    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
+    \includegraphics[width=.65\textwidth]{figures/flow_acc_abl}
   }
  \begin{itemize}
     \item What determines the glacier shape and extend
@@ -451,6 +497,24 @@ fluid. So what does this mean?
 \end{frame}
 
 
+\section{Math Stuff}
+
+\begin{frame}
+  \frametitle{Recall from Vector Calculus}
+  \begin{block}{Divergence Theorem}
+    \begin{equation}
+      \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
+      \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
+    \end{equation}
+  \end{block}
+  \begin{block}{Reynolds Tranport Theorem}
+    \begin{equation}
+     \frac{\text{d}}{\text{d} t}\int_{\omega} \boldsymbol{\phi}\, \text{d} v =
+     \int_{\omega} \frac{\partial \boldsymbol{\phi}}{\partial{t}} \, \text{d} v +
+      \oint_{\partial \omega} \boldsymbol{\phi} \mathbf{v}\cdot\mathbf{n}\,\text{d}a 
+    \end{equation}
+  \end{block}
+\end{frame}
 \end{document}
 
 
