@@ -89,20 +89,20 @@
 %\end{frame}
 %} 
 
-\plainframe{
+\begin{frame}[plain] % not in the handout
   \begin{figure}
     \pgfputat{\pgfxy(-.39,.25)}{
-    \includegraphics<1>[width=\paperwidth]{figures/gorner}%
+    \includegraphics<1| handout: 0>[width=\paperwidth]{figures/gorner}%
     \includegraphics<2>[width=\paperwidth]{figures/gorner_clarke}%    
   }
   \end{figure}
-}
+\end{frame}
 
 \begin{frame}
   \frametitle{Course Material}
   \begin{itemize}
     \item notation follows closely \cite{GreveBlatter_disg}
-    \item covers Chapter~3\,--\,5.1
+    \item covers parts of Chapters~3\,--\,5.1
     \item \url{http://www.gi.alaska.edu/~aaschwanden/lecture.html}
   \end{itemize}
   \def\newblock{}
@@ -167,7 +167,8 @@
       \begin{itemize}
         \item made his own observations on Mer de Glace, France
           \item glacier flows fastest in the center
-        \item opposes Agassi' theory, if the dilatation theory were true
+        \item opposes Agassis theory
+        \item if the dilatation theory were true
         \item then flow would be greatest at sunset
         \item and near the glacier margins
       \end{itemize}
@@ -225,6 +226,7 @@
        \end{itemize}
      \item Define constitutive equations
   \end{itemize}
+  \note{usefull stuff, not only for ice dynamics. recently applied by Truffer to solve a surface mass balance problem}
 \end{block}
 \end{frame}
 
@@ -233,35 +235,183 @@
 
 \begin{frame}
   \frametitle{General Balance Equations}
-  \begin{equation*}
-   \frac{\partial g}{\partial t} = - \nabla \cdot \left(\boldsymbol{\phi} + g\mathbf{v}\right) + p + s
- \end{equation*}
- \begin{columns}
-   \column[C]{0.1cm}
-   $g$ \\
-   $\boldsymbol{\phi}$ \\
-   $p$ \\
-   $s$ \\
-   \column[C]{6cm}
-   physical quantity \\
-   flux of $g$ through the boundary \\
-   production of $g$ \\
-   supply of $g$
- \end{columns}
+  \begin{block}{In integral form}
+    \begin{eqnarray}
+      \frac{\text{d} }{\text{d} t} \int_{\omega} g \, \text{d} v & = & - \oint_{\partial \omega} \boldsymbol{\phi} \cdot \mathbf{n} \, \text{d} a +  \int_{\omega} \left(p + s\right) \, \text{d} v \\
+      & = & - \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v +  \int_{\omega} \left(p + s\right) \, \text{d} v
+    \end{eqnarray}
+    \begin{columns}
+      \column[C]{0.1cm}
+      $g$ \\
+      $\boldsymbol{\phi}$ \\
+      $p$ \\
+      $s$ \\
+      \column[C]{6cm}
+      physical quantity \\
+      flux of $g$ through the boundary \\
+      production of $g$ \\
+      supply of $g$
+    \end{columns}
+  \end{block}
+
 \end{frame}
+
+\begin{frame}
+  \frametitle{General Balance Equation}
+  \begin{block}{In local form}
+    \begin{equation}
+      \frac{\partial g}{\partial t} = - \nabla \cdot \left(\boldsymbol{\phi} + g\mathbf{v}\right) + p + s
+    \end{equation}
+    \begin{columns}
+      \column[C]{0.1cm}
+      $g$ \\
+      $\boldsymbol{\phi}$ \\
+      $p$ \\
+      $s$ \\
+      \column[C]{6cm}
+      physical quantity \\
+      flux of $g$ through the boundary \\
+      production of $g$ \\
+      supply of $g$
+    \end{columns}
+  \end{block}
+  use
+  \begin{itemize}
+    \item Reynolds transport theorem
+    \item Divergence theorem
+    \end{itemize}
+    to go back and forth
+\end{frame}
+
+
+\subsection{Mass Balance}
+
+\begin{frame}
+  \frametitle{Mass Balance}
+  \begin{itemize}
+    \item the mass of a material volume cannot change, $\text{d} M/\text{d} t=0$
+    \end{itemize}
+    \begin{columns}
+      \column[C]{1cm}
+      $g = \rho$ \\
+      $\boldsymbol{\phi} =0 $ \\
+      $p = 0$ \\
+      $s = 0$ \\
+      \column[C]{6cm}
+      mass density \\
+      flux of $g$ through the boundary \\
+      production of $g$ \\
+      supply of $g$
+    \end{columns}
+    \vskip1em
+    from the above we get
+   \begin{equation}
+      \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \, \text{d} v = 0
+    \end{equation} or in local form
+    \begin{equation}
+      \frac{\partial \rho}{\partial t} + \nabla \cdot \left(\rho \mathbf{v}\right) = 0
+    \end{equation}
+    $\Rightarrow$ known as the \alert{continuity equation}
+\end{frame}
+
+
+\subsection{Momentum Balance}
+
+\begin{frame}
+  \frametitle{Momentum Balance}
+  Newton's Second Law
+  \begin{itemize}
+    \item total rate of change of momentum $\mathbf{P}$ equals sum of all forces $\mathbf{F}$
+    \begin{equation}
+      \frac{\text{d} \mathbf{P}}{\text{d} t} = \mathbf{F} = \underbrace{\oint_{\partial \omega} \mathbf{t}_{\mathbf{n}} \, \text{d} a}_{\text{internal}} +\underbrace{\int_{\omega} \mathbf{f} \, \text{d} v}_{\text{external}}
+    \end{equation}
+    \item identify $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$
+      \item $\mathbf{T}$ is the \alert{Chauchy stress tensor}
+    \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Momentum Balance}
+  \begin{columns}
+    \column[C]{2cm}
+    $g = \rho \mathbf{v}$ \\
+    $\boldsymbol{\phi} = - \mathbf{T} $ \\
+    $p = 0$ \\
+    $s = \mathbf{f}$ \\
+    \column[C]{6cm}
+      momentum density \\
+      flux of $g$ through the boundary \\
+      production of $g$ \\
+      supply of $g$
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Momentum Balance}
+  from the previous we get
+  \begin{eqnarray}
+    \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \mathbf{v}\, \text{d} v & = & - \oint_{\partial \omega} \mathbf{T} \cdot \mathbf{n} \, \text{d} a + \int_{\omega} \mathbf{f} \, \text{d} v \\
+    & & -\int_{\omega} \nabla \cdot \mathbf{T}\, \text{d} v + \int_{\omega} \mathbf{f} \, \text{d} v
+  \end{eqnarray} or in local form
+  \begin{equation}
+    \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = -\nabla \cdot \mathbf{T} + \mathbf{f}
+  \end{equation}
+\end{frame}
+
+
+\subsection{Angular Momentum Balance}
+
+\begin{frame}
+  \frametitle{Angular Momentum Balance}
+  \begin{itemize}
+  \item  no, I don't want to do the whole derivation here
+  \item if you're interested (or bored), go through Equations~3.77\,--\,3.83  in \cite{GreveBlatter_disg}
+  \item here, we just use the result
+  \item the stress tensor $\mathbf{T}$ is \alert{symmetric}
+  \end{itemize}
+  \begin{equation}
+    \mathbf{T} = \mathbf{T}^{T}
+ \end{equation}
+\end{frame}
+
+
+\subsection{Energy Balance}
+
+\begin{frame}
+  \frametitle{Energy Balance}
+  \begin{itemize}
+  \item  only the total energy (sum of kinetic and inner energy) is a \alert{conserved} quantity
+  \item balance of kinetic energy is \alert{not an independent statment} but a mere consequence of the momentum balance
+  \item here, we formulate the balance of specific inner energy, $u$:
+ \end{itemize}
+  \begin{equation}
+    \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r
+ \end{equation}
+  \begin{columns}
+    \column[C]{3cm}
+    $g = \rho \mathbf{v}$ \\
+    $\boldsymbol{\phi} = \mathbf{q} $ \\
+    $p = \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) $ \\
+    $s = \rho r$ \\
+    \column[C]{6cm}
+      specific internal energy \\
+      heat flux \\
+      dissipation power \\
+      specific radiation power
+    \end{columns}
+\end{frame}
+
 
 
 \begin{frame}
   \frametitle{Balance Equations}
-  \large{
   \begin{equation*}
   \begin{array}{lcclc}
     \text{mass} \quad &  \frac{\text{d} \rho}{\text{d} t} & = & -\rho\nabla \cdot \mathbf{v} \quad & (1)\\[.25em]
-    \text{momentum} \quad & \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} - \mathbf{f} \quad & (3) \\[.25em]
-    \text{internal energy} \quad & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) \quad & (1)
+    \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} - \mathbf{f} \quad & (3) \\[.25em]
+    \text{internal energy} \quad & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
   \end{array}
   \end{equation*}
-  }
 \centering{
  \begin{columns}
    \column[T]{4cm} \centering{
@@ -506,6 +656,7 @@ fluid. So what does this mean?
       \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
       \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
     \end{equation}
+    \note{The sum of all sources minus the sum of all sinks gives the net flow out of a region}
   \end{block}
   \begin{block}{Reynolds Tranport Theorem}
     \begin{equation}
@@ -513,6 +664,7 @@ fluid. So what does this mean?
      \int_{\omega} \frac{\partial \boldsymbol{\phi}}{\partial{t}} \, \text{d} v +
       \oint_{\partial \omega} \boldsymbol{\phi} \mathbf{v}\cdot\mathbf{n}\,\text{d}a 
     \end{equation}
+    \note{What was already there plus what goes in minus what goes out is what is there}
   \end{block}
 \end{frame}
 \end{document}
