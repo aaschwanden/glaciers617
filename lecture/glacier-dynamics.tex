@@ -51,18 +51,18 @@
 {
  \begin{frame}<beamer>
    \frametitle{Outline}
-   \tableofcontents[currentsection,subsectionstyle=hide/show/hide]
+   \tableofcontents[currentsection,subsectionstyle=hide/hide/hide]
  \end{frame}
 }
 
 % define what is shown at the beginning of each subsection
-\AtBeginSubsection[]
-{
- \begin{frame}<beamer>
-  \frametitle{Outline}
-   \tableofcontents[currentsection,currentsubsection]
- \end{frame}
-}
+% \AtBeginSubsection[]
+% {
+%  \begin{frame}<beamer>
+%   \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+% }
 
 \begin{document}
 
@@ -96,6 +96,17 @@
     \includegraphics<2>[width=\paperwidth]{figures/gorner_clarke}%    
   }
   \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ice Dynamics}
+  unfortunately, \alert{ice dynamics} is
+  \begin{itemize}
+    \item physics
+    \item continuum mechanics
+    \item thermodynamics
+    \item and equations, equations, and more equations
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -148,7 +159,7 @@
         \item glacier ice contains innumerable fissures and capillary tubes
         \item during the day, these tubes imbibe the water
         \item and during the night, the water freezes
-        \item this distension exertcs a force and propels the glacier in the direction of least resistance
+        \item this distension exerts a force and propels the glacier in the direction of least resistance
       \end{itemize}
     \end{block}
  \end{columns}
@@ -167,7 +178,7 @@
       \begin{itemize}
         \item made his own observations on Mer de Glace, France
           \item glacier flows fastest in the center
-        \item opposes Agassis theory
+        \item opposes Agassi's theory
         \item if the dilatation theory were true
         \item then flow would be greatest at sunset
         \item and near the glacier margins
@@ -215,7 +226,7 @@
     \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
   }
 
- \begin{block}{Solution: Continuums Mechanics \& Rheology}
+ \begin{block}{Solution: Continuum Mechanics \& Rheology}
    \begin{itemize}
      \item Solve balance equations for
        \begin{itemize}
@@ -226,7 +237,7 @@
        \end{itemize}
      \item Define constitutive equations
   \end{itemize}
-  \note{usefull stuff, not only for ice dynamics. recently applied by Truffer to solve a surface mass balance problem}
+  \note{useful stuff, not only for ice dynamics. recently applied by Truffer to solve a surface mass balance problem}
 \end{block}
 \end{frame}
 
@@ -325,13 +336,23 @@
     \begin{equation}
       \frac{\text{d} \mathbf{P}}{\text{d} t} = \mathbf{F} = \underbrace{\oint_{\partial \omega} \mathbf{t}_{\mathbf{n}} \, \text{d} a}_{\text{internal}} +\underbrace{\int_{\omega} \mathbf{f} \, \text{d} v}_{\text{external}}
     \end{equation}
-    \item identify $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$
-      \item $\mathbf{T}$ is the \alert{Chauchy stress tensor}
-    \end{itemize}    
+  \item identify $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$
+  \item $\mathbf{T}$ is the \alert{Cauchy stress tensor}
+  \item external forces: gravity, Coriolis force,
+  \end{itemize}    
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Momentum Balance}
+  from the previous we get
+  \begin{eqnarray}
+    \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \mathbf{v}\, \text{d} v & = & - \oint_{\partial \omega} \mathbf{T} \cdot \mathbf{n} \, \text{d} a + \int_{\omega} \mathbf{f} \, \text{d} v \\
+    & & -\int_{\omega} \nabla \cdot \mathbf{T}\, \text{d} v + \int_{\omega} \mathbf{f} \, \text{d} v
+  \end{eqnarray} or in local form
+  \begin{equation}
+    \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = -\nabla \cdot \mathbf{T} + \mathbf{f}
+  \end{equation}
   \begin{columns}
     \column[C]{2cm}
     $g = \rho \mathbf{v}$ \\
@@ -344,18 +365,6 @@
       production of $g$ \\
       supply of $g$
     \end{columns}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Momentum Balance}
-  from the previous we get
-  \begin{eqnarray}
-    \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \mathbf{v}\, \text{d} v & = & - \oint_{\partial \omega} \mathbf{T} \cdot \mathbf{n} \, \text{d} a + \int_{\omega} \mathbf{f} \, \text{d} v \\
-    & & -\int_{\omega} \nabla \cdot \mathbf{T}\, \text{d} v + \int_{\omega} \mathbf{f} \, \text{d} v
-  \end{eqnarray} or in local form
-  \begin{equation}
-    \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = -\nabla \cdot \mathbf{T} + \mathbf{f}
-  \end{equation}
 \end{frame}
 
 
@@ -381,24 +390,27 @@
   \frametitle{Energy Balance}
   \begin{itemize}
   \item  only the total energy (sum of kinetic and inner energy) is a \alert{conserved} quantity
-  \item balance of kinetic energy is \alert{not an independent statment} but a mere consequence of the momentum balance
+  \item balance of kinetic energy is \alert{not an independent statement} but a mere consequence of the momentum balance
   \item here, we formulate the balance of specific inner energy, $u$:
- \end{itemize}
+  \end{itemize}
   \begin{equation}
     \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r
- \end{equation}
-  \begin{columns}
-    \column[C]{3cm}
-    $g = \rho \mathbf{v}$ \\
-    $\boldsymbol{\phi} = \mathbf{q} $ \\
-    $p = \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) $ \\
-    $s = \rho r$ \\
-    \column[C]{6cm}
-      specific internal energy \\
-      heat flux \\
-      dissipation power \\
-      specific radiation power
-    \end{columns}
+  \end{equation}
+\vskip1em
+ \begin{columns}
+   \column[C]{3cm}
+   $g = \rho \mathbf{v}$ \\
+   $\boldsymbol{\phi} = \mathbf{q} $ \\
+   $p = \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) $ \\
+   $s = \rho r$ \\
+   $\mathbf{D} = 1/2\left(\mathbf{v}^{T}+\mathbf{v}\right)$
+   \column[C]{6cm}
+   specific internal energy \\
+   heat flux \\
+   dissipation power \\
+   specific radiation power\\
+   \alert{strain rate} or \alert{velocity gradient} tensor
+ \end{columns}
 \end{frame}
 
 
@@ -408,8 +420,8 @@
   \begin{equation*}
   \begin{array}{lcclc}
     \text{mass} \quad &  \frac{\text{d} \rho}{\text{d} t} & = & -\rho\nabla \cdot \mathbf{v} \quad & (1)\\[.25em]
-    \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} - \mathbf{f} \quad & (3) \\[.25em]
-    \text{internal energy} \quad & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
+    \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} + \mathbf{f} \quad & (3) \\[.25em]
+    \text{internal energy} \quad & \rho\frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
   \end{array}
   \end{equation*}
 \centering{
@@ -435,6 +447,7 @@
 \end{frame}
 
 
+
 \begin{frame}
   \frametitle{Closure Relations}
   \begin{itemize}
@@ -445,104 +458,198 @@
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Balance Equations for Glaciers}
-  \large{
-  \begin{equation*}
-  \begin{array}{lcclc}
-    \text{mass} &  \nabla \cdot \mathbf{v} & = & 0 \quad & (3)\\
-    \text{momentum} & \nabla \cdot \mathbf{T} & = & - \rho \mathbf{g} \quad & (3)\\
-    \text{internal energy} & \frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr}\left(\mathbf{T}\cdot\mathbf{D}\right) \quad & (1)
-  \end{array}
-  \end{equation*}
-  }
-\centering{
- \begin{columns}
-   \column[T]{4cm} \centering{
-   left-hand side \\
-   $\mathbf{v}$ (3)\\
-   $\mathbf{T}$ (6)\\
-   $u$ (1)
-   }
-   \column[T]{4cm} \centering{
-   right-hand side \\
-  $\mathbf{q}$ (3)
-  }
- \end{columns}
-  }
-  \begin{itemize}
-   \item so we have 7 equations for 13 unknown fields
-   \item the system is highly under-determined
-   \item[$\Rightarrow$] \alert{closure relations} required
- \end{itemize}
-\end{frame}
-
-
 \section{Constitutive Equations}
 
+\subsection{Material Science}
+
+
+
 \begin{frame}
-  \frametitle{Constitutive Equations for Glaciers}
-  \begin{itemize}
-    \item for the heat flux $\mathbf{q}$
-    \item for the viscosity $\eta$
-  \end{itemize}
+  \frametitle{Material Science}
+  \begin{block}{Rheology}
+    \begin{itemize}
+    \item is the study of the flow of complex liquids or the deformation of soft solids.
+    \item We are not going through this in great detail.
+    \item[$\Rightarrow$] For further information, consult the handout or
+      \item take Martin Truffers ``Ice Physics 614''  class
+    \end{itemize}
+  \end{block}
+  \begin{block}{We need to define}
+    \begin{itemize}
+    \item a constitutive equation for the heat flux $\mathbf{q}$
+    \item and for the internal energy $u$
+    \item a relationship between stress and strain, $\mathbf{T} = f(\mathbf{D})$
+   \end{itemize}
+  \end{block}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Constitutive Equations for Glaciers}
+  \frametitle{Rheology}
   \begin{itemize}
     \item ask a material scientist or rheologist
     \item and let him/her do some fancy experiments
  \end{itemize}
+  \begin{figure}
+  \includegraphics[width=7cm]{figures/fig_4_04}
+  \end{figure}
+  \note{
+    apply a constant stress (creep experiment)
+    \begin{itemize}
+    \item if the material, after some deformation, eventually resists further deformation, it is a \alert{solid}
+    \item if the material flows idefinitively, it's a \alert{liquid}
+    \end{itemize}
+  }
 \end{frame}
 
+\subsection{Shear Experiment}
 
 \begin{frame}
-  \frametitle{Constitutive Equations for Glaciers}
-  From experiments, you will learn that ice behaves like a
+  \frametitle{Example: Shear Experiment}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
   \begin{itemize}
-    \item viscous
-    \item non-Newtionian
-    \item heat-conduction
+    \item initial elastic deformation
+    \item primary creep: shear rate $\dot\gamma$ decreases with time
+    \item \alert{secondary creep}: shear rate remains constant
+    \item acceleration phase
+    \item tertiary creep: constant shear rate (but higher) 
  \end{itemize}
-fluid. So what does this mean?
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Constitutive Equations for Glaciers}
-  \begin{block}{Viscous material}
- \begin{itemize}
-    \item deformation rate $\propto$ stress
-\end{itemize}
- \end{block}
-  \begin{block}{Non-Newtonian fluid}
- \begin{itemize}
-    \item non-linear relationship between deformation rate and stress
-\end{itemize}
- \end{block}
+  \frametitle{Example: Shear Experiment}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
+  \vskip1em
+  This suggests that
+  \begin{itemize}
+  \item the shear rate is a function of the applied shear stress, temperature $T$, and pressure $p$
+    \begin{equation}
+      \dot\gamma = \dot\gamma\left(\tau,T,p\right)
+    \end{equation}
+   \end{itemize}
+ \end{frame}
+
+
+\begin{frame}
+  \frametitle{Example: Shear Experiment}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
+  \vskip1em
+  \begin{itemize}
+  \item The dynamic viscosity $\eta$ relates shear stress and shear rate
+    \begin{equation}
+      \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
+    \end{equation}
+  \end{itemize}
+\end{frame}
+
+
+\subsection{Flow Relation}
+
+\begin{frame}
+  \frametitle{Generalization}
+  \begin{block}{Assume}
+  \begin{itemize}
+  \item secondary creep
+  \item incompressibility of ice, $\mathbf{T} = -p\mathbf{1} + \underbrace{\mathbf{T}'}_{\text{deviatoric}}$
+\item with the pressure $p=-1/3\text{tr}{\mathbf{T}}$
+  \end{itemize}
+\end{block}
+  \vskip.5em
+  The only non-straightforward step from
+  \begin{equation}
+    \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
+  \end{equation}
+  to
+  \begin{equation}
+    \mathbf{T}' = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
+  \end{equation}
+  is the generalization of $\vert \dot\gamma\vert$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Generalization}
+  \begin{equation}
+    \mathbf{T} = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
+  \end{equation}
+  is a relation between two tensors (i.e. $\mathbf{T}$ and $\mathbf{D}$)
+  \begin{itemize}
+  \item \alert{material objectivity} tells us that such a relationship must be independent of the chosen vector basis
+  \item a second rank tensor has 3 scalar invariants
+    \begin{eqnarray}
+      I_{\mathbf{T}'} & = & \text{tr}\mathbf{T}' \\
+      II_{\mathbf{T}'} & = & 1/2\,\text{tr}\left(\mathbf{T}'\right)^{2}\\
+      III_{\mathbf{T}'} & = & \text{det}\,\mathbf{T}'
+    \end{eqnarray}
+    \item $\text{tr}\mathbf{T}'=0$ for incompressible media
+    \item $\sigma_{\text{e}} = \sqrt{II_{\mathbf{T}'}}$ is the \alert{effective stress}
+    \item role of $ III_{\mathbf{T}'}$ is not clear, but lab experiments indicate that the third invariant is not important
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Generalization}
+  Numerous lab experiments and field measurements suggest
+    \begin{equation}
+      \frac{1}{\eta\left(T,p,\sigma_{\text{e}}\right)} =2A\left(T,p\right)f\left(\sigma_{\text{e}}\right)
+    \end{equation}
+    where
+    \begin{equation*}
+      \begin{array}{rcll}
+      A(T,p) & = & A_{0} e^{-(Q+pV)/T} &\qquad \text{Arrehenius law}\\[.25em]
+      f\left(\sigma_{\text{e}}\right) & = &\sigma_{\text{e}}^{n-1} &\qquad \text{power law}
+      \end{array}
+    \end{equation*}
+    \vskip1em
+    This is known as \alert{Glen's flow law} or \alert{Glen-Steinemann flow law}
 \end{frame}
 
 
 \section{Glaciers}
 
 
-\subsection{Balance Equations}
+\subsection{Scale analysis}
 
 \begin{frame}
   \frametitle{Large-Scale Dynamics}
-  \begin{itemize}
+  \begin{figure}
+    \includegraphics[width=.55\textwidth]{figures/fig_5_01}%
+  \end{figure}
+ \begin{itemize}
     \item Ice sheets are glaciers too!
+    \item Recall momentum balanace $\rho \frac{\text{d} \mathbf{v}}{\text{d} t}  =  -\nabla \cdot \mathbf{T} + \mathbf{f}$
   \end{itemize}
-  \vskip1em
-  \centering{
-    \includegraphics[width=.75\textwidth]{figures/fig_5_01}%
-    }
 \end{frame}
 
 \begin{frame}
-  \frametitle{Large-Scale Dynamics}
+  \frametitle{Scale Analysis}
   \begin{block}{Some typical values for an ice sheet}
   \begin{equation*}
   \begin{array}{rccl}
@@ -561,12 +668,12 @@ fluid. So what does this mean?
   \end{equation*}
   \begin{itemize}
     \item The scaling argument for valley glaciers is almost the same
-   \end{itemize}
+  \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Large-Scale Dynamics}
+  \frametitle{Scale Analysis}
   \begin{block}{Froude number}
     The \alert{Froude number $Fr$} is the ratio of acceleration and pressure gradient. In the horizontal we have
   \begin{equation*}
@@ -582,7 +689,7 @@ fluid. So what does this mean?
 
 
 \begin{frame}
-  \frametitle{Large-Scale Dynamics}
+  \frametitle{Scale Analysis}
   \begin{block}{Rossby number}
     The \alert{Rossby number $Ro$} is the ratio of acceleration and Coriolis force
   \begin{equation*}
@@ -597,35 +704,42 @@ fluid. So what does this mean?
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Large-Scale Dynamics}
-  By neglection both the
-  \begin{itemize}
-    \item acceleration term
-    \item Coriolis term
-   \end{itemize}
-   the Navier-Stokes equation simplifies to
- \begin{equation*}
-    \nabla p + \nabla \cdot \left(\eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)\right) = - \rho \mathbf{g}
-  \end{equation*}
-  This is called the \alert{Stoke equations}
-\end{frame}
+\subsection{Stokes Equation}
 
 
 \begin{frame}
-  \frametitle{Large-Scale Dynamics}
-  Sweet. But what does it mean?
-  Remember that 
-  \begin{equation*}\mathbf{T} =  -p\mathbf{1} + 2\eta \mathbf{D} = -p\mathbf{1} + \eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)
-  \end{equation*}
-  We can therefore write the Stokes equation also as
- \begin{equation*}
-    \nabla \cdot \mathbf{T} = - \rho \mathbf{g}
-  \end{equation*}
+  \frametitle{Stokes Equation}
+  By neglecting both the
   \begin{itemize}
-    \item gravitional force exerted on the ice are balanced by stresses within the ice
+  \item acceleration term
+  \item Coriolis term
+  \end{itemize}
+  the Navier-Stokes equation simplifies to
+  \begin{equation}
+    \nabla \cdot \mathbf{T} =  - \nabla p + \nabla \cdot \left(\eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)\right) = - \rho \mathbf{g}
+  \end{equation}
+  \begin{itemize}
+  \item gravitational force exerted on the ice are balanced by stresses within the ice
+  \item this is called the \alert{Stokes equation}
   \end{itemize}
 \end{frame}
+
+
+\subsection{Energy Balance}
+
+\begin{frame}
+  \frametitle{Specific Internal Energy}
+  \begin{equation}
+    \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r
+  \end{equation}
+  \begin{itemize}
+  \item radiation is negligible
+ \end{itemize}
+  \begin{equation}
+    \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right)
+  \end{equation}
+\end{frame}
+
 
 
 \subsection{Boundary Conditions}
@@ -635,14 +749,14 @@ fluid. So what does this mean?
   \frametitle{Free Surface}
   Sweet. But what does it mean?
   Remember that 
-  \begin{equation*}\mathbf{T} =  -p\mathbf{1} + 2\eta \mathbf{D} = -p\mathbf{1} + \eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)
+  \begin{equation*} \nabla \cdot \mathbf{T} =  -p\mathbf{1} + 2\eta \mathbf{D} = -p\mathbf{1} + \eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)
   \end{equation*}
   We can therefore write the Stokes equation also as
  \begin{equation*}
     \nabla \cdot \mathbf{T} = - \rho \mathbf{g}
   \end{equation*}
   \begin{itemize}
-    \item gravitional force exerted on the ice are balanced by stresses within the ice
+    \item gravitational force exerted on the ice are balanced by stresses within the ice
   \end{itemize}
 \end{frame}
 
@@ -656,17 +770,55 @@ fluid. So what does this mean?
       \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
       \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
     \end{equation}
-    \note{The sum of all sources minus the sum of all sinks gives the net flow out of a region}
   \end{block}
-  \begin{block}{Reynolds Tranport Theorem}
+  \begin{block}{Reynolds Transport Theorem}
     \begin{equation}
      \frac{\text{d}}{\text{d} t}\int_{\omega} \boldsymbol{\phi}\, \text{d} v =
      \int_{\omega} \frac{\partial \boldsymbol{\phi}}{\partial{t}} \, \text{d} v +
       \oint_{\partial \omega} \boldsymbol{\phi} \mathbf{v}\cdot\mathbf{n}\,\text{d}a 
     \end{equation}
-    \note{What was already there plus what goes in minus what goes out is what is there}
+    \note{\begin{itemize}
+      \item The sum of all sources minus the sum of all sinks gives the net flow out of a region
+      \item What was already there plus what goes in minus what goes out is what is there
+      \end{itemize}
+    }
   \end{block}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{The Cauchy Stress Tensor}
+  \begin{columns}
+    \column[c]{6cm}
+    \begin{figure}
+      \includegraphics[width=5.cm]{figures/fig_3_08}
+    \end{figure}
+    \column[c]{5cm}
+  \begin{displaymath} 
+    \mathbf{T} = \left( 
+      \begin{array}{ccc} 
+        t_{xx} & t_{xy} & t_{xz} \\ 
+        t_{yx} & t_{yy} & t_{yz} \\ 
+        t_{zx} & t_{zx} & t_{zz} 
+      \end{array} 
+    \right) 
+  \end{displaymath}
+  \end{columns}
+  \vskip1em
+  For example
+  \begin{displaymath}
+    \mathbf{t}_{\mathbf{e}_{z}} =
+    \left(
+      \begin{array}{c}
+        t_{xz}\\
+        t_{yz}\\
+        t_{zz}
+      \end{array}
+    \right)
+  \end{displaymath}
+  is the stress vector of a cut along the xy-plane
+\end{frame}
+
 \end{document}
 
 
