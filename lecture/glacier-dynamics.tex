@@ -1,5 +1,5 @@
 
-\documentclass[hide notes,intlimits,handout]{beamer}
+\documentclass[hide notes,intlimits]{beamer}
 
 
 \mode<presentation>
@@ -620,6 +620,10 @@
       f\left(\sigma_{\text{e}}\right) & = &\sigma_{\text{e}}^{n-1} &\qquad \text{power law}
       \end{array}
     \end{equation*}
+    \begin{itemize}
+    \item $A$ is called \alert{rate factor}
+    \item $n$ is the exponent of the flow law, usually taken as $n=3$
+    \end{itemize}
     \vskip1em
     This is known as \alert{Glen's flow law} or \alert{Glen-Steinemann flow law}
 \end{frame}
@@ -630,12 +634,19 @@
   \begin{equation}
     u = u_{0} + c\left(T-T_{0}\right)
   \end{equation}
-  where $u_{0}$ is a reference value at a reference temperature $T$
+  \begin{itemize}
+  \item $u_{0}$ is a reference value at a reference temperature $T$
+  \item $c$ is the heat capacity
+  \item we obtain
+  \end{itemize}
+  \begin{equation}
+    \frac{\text{d} u}{\text{d} t} =     c \frac{\text{d} T}{\text{d} t} 
+  \end{equation}
 \end{frame}
 
 \begin{frame}
   \frametitle{Heat Flux}
- \begin{block}{Fourier Equation}
+ \begin{block}{Fourier's law of heat conduction}
   \begin{columns}
     \column[c]{5.5cm}
   \begin{figure}
@@ -661,11 +672,13 @@
 \begin{frame}
   \frametitle{Large-Scale Dynamics}
   \begin{figure}
-    \includegraphics[width=.55\textwidth]{figures/fig_5_01}%
+    \includegraphics<1>[width=7cm]{figures/fig_5_01}
+    \includegraphics<2>[width=7cm]{figures/fig_5_01_sheet}
   \end{figure}
- \begin{itemize}
-    \item Ice sheets are glaciers too!
-      \item ice is assumed to be incompressible, $\nabla \cdot \mathbf{v} = 0$
+  \begin{itemize}
+  \item Ice sheets are glaciers too!
+  \item we will focus on the ice sheet part and, for now, ignore ice shelves
+  \item ice is assumed to be incompressible, $\nabla \cdot \mathbf{v} = 0$
   \end{itemize}
 \end{frame}
 
@@ -676,20 +689,21 @@
       \begin{array}{lrclc}
         \text{mass} \quad &  0& = & \nabla \cdot \mathbf{v} \quad & (1)\\[.25em]
         \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T'} + \nabla p + \mathbf{f} \quad & (3) \\[.25em]
-        \text{internal energy} \quad & \rho\frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
+        \text{temperature} \quad & \rho c\frac{\text{d} T}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
       \end{array}
     \end{equation*}
   \end{block}
   \begin{block}{Flow Law}
+    \vskip-.5em
     \begin{equation*}
       \begin{array}{lrclc}
-              \text{Glen's flow law}\quad & \mathbf{T}' & = & 2\,\eta\,\mathbf{D}  = 1/2 A^{-1/n}\varepsilon_{\text{e}}^{\frac{1-n}{n}} \mathbf{D} \quad &(6)
+              \text{Glen's flow law}\quad & \mathbf{T}' & = & 2\,\eta\,\mathbf{D}  = 1/2 A(T)^{-1/n}\varepsilon_{\text{e}}^{\frac{1-n}{n}} \mathbf{D} \quad &(6)
       \end{array}
     \end{equation*}
   \end{block}
   \begin{itemize}
-  \item now we have 15 equations for 15 unknown fields, $\rho (1), \mathbf{v} (3), p (1), \mathbf{T}' (6), u (1), \mathbf{q} (3)$
-   \item the system is still under-determined, but we are getting closer
+  \item now we have 15 equations for 15 unknown fields
+   \item the system is now well-determined
    \end{itemize}
  \end{frame}
  
@@ -697,25 +711,14 @@
 \subsection{Scale analysis}
 
 \begin{frame}
-  \frametitle{The Big Picture}
+  \frametitle{The Incompressible Navier-Stokes Equation}
   \begin{block}{Momentum Balance}
     \begin{equation}
-        \rho \frac{\text{d} \mathbf{v}}{\text{d} t} = -\nabla \cdot \mathbf{T'} + \nabla p + \underbrace{\rho\mathbf{g}}_{\text{gravity}} - \underbrace{2\rho\boldsymbol{\Omega} \times \mathbf{v}}_{\text{Coriolis force}} 
+        \underbrace{\rho \frac{\text{d} \mathbf{v}}{\text{d} t}}_{\text{acceleration}} = - \underbrace{\nabla \cdot \mathbf{T'}}_{\text{deviatoric}} + \underbrace{\nabla p}_{\text{isotropic}} + \underbrace{\rho\mathbf{g}}_{\text{gravity}} - \underbrace{2\rho\boldsymbol{\Omega} \times \mathbf{v}}_{\text{Coriolis force}} 
    \end{equation}
    This is the \alert{Navier-Stokes} equation for incompressible flow
   \end{block}
-  \begin{block}{Flow Law}
-    \begin{equation}
-      \begin{array}{lrclc}
-              \text{Glen's flow law}\quad & \mathbf{T}' & = & 2\,\eta\,\mathbf{D}  = 1/2 A^{-1/n}\varepsilon_{\text{e}}^{\frac{1-n}{n}} \mathbf{D} \quad &(6)
-      \end{array}
-    \end{equation}
-  \end{block}
-  \begin{itemize}
-  \item now we have 15 equations for 15 unknown fields, $\rho (1), \mathbf{v} (3), p (1), \mathbf{T}' (6), u (1), \mathbf{q} (3)$
-   \item the system is still under-determined, but we are getting closer
-   \end{itemize}
- \end{frame}
+\end{frame}
  
 
 \begin{frame}
@@ -763,11 +766,11 @@
   \begin{block}{Rossby number}
     The \alert{Rossby number $Ro$} is the ratio of acceleration and Coriolis force
   \begin{equation*}
-    Ro = \frac{[U]}{\Omega [L]} \approx 2\times10^{-8}
+    Ro = \frac{\rho[U]/[t]}{2\rho\Omega[U]} = \frac{\rho[U]^{2}/[L]}{2\rho\Omega[U]} = \frac{[U]}{2 \Omega [L]} \approx 2\times10^{-8}
   \end{equation*}
   and thus the Coriolis to pressure gradient is
   \begin{equation*}
-   \frac{Fr}{Ro}\approx 10^{-8}
+   \frac{2\rho\Omega[U]}{[P]/[L]} = \frac{Fr}{Ro}\approx 5 \times 10^{-8}
   \end{equation*}
   $\Rightarrow$ The \alert{Coriolis term} is also \alert{negligible}
   \end{block}
@@ -798,16 +801,16 @@
 \subsection{Energy Balance}
 
 \begin{frame}
-  \frametitle{Specific Internal Energy}
-  Recall the balance equation for specific inner energy
+  \frametitle{Temperature Equation}
+  Recall the equation for temperature
   \begin{equation}
-    \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r
+    \rho\frac{\text{d} T}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r
   \end{equation}
   \begin{itemize}
-  \item radiation is negligible
+  \item execpt for the uppermost few centimeters of ice,\\ radiation is negligible
  \end{itemize}
   \begin{equation}
-    \rho\frac{\text{d} u}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right)
+    \rho\frac{\text{d} T}{\text{d} t} = - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right)
   \end{equation}
 \end{frame}
 
@@ -817,8 +820,193 @@
 
 
 \begin{frame}
+  \frametitle{Boundary Conditions}
+  \begin{block}{Balance Equations}
+    \begin{equation*}
+      \begin{array}{lrcl}
+        \text{mass} \quad &  \nabla \cdot \mathbf{v}  & = & 0\\[.25em]
+        \text{momentum} \quad &  \nabla \cdot \left(\eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)\right)- \nabla p & = &  -\rho\mathbf{g} \\[.25em]
+        \text{temperature} \quad & \rho c\frac{\text{d} T}{\text{d} t} - \nabla \cdot \left(k \nabla T\right) & = &  \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) 
+      \end{array}
+    \end{equation*}
+  \end{block}
+ \begin{block}{Boundary Conditions} 
+  To solve this system of equations, we need boundary conditions:
+  \begin{itemize}
+  \item mass (kinematic)
+  \item momentum (dynamic)
+  \item temperature (thermodynamic)
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
   \frametitle{Free Surface}
-  
+  \begin{figure}
+    \includegraphics[width=4cm]{figures/fig_5_03}%
+  \end{figure}
+  \begin{itemize}
+  \item will not derive transition/boundary conditions
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Kinematic Boundary Condition}
+  \begin{block}{Surface}
+    \begin{equation}
+      \frac{\partial h}{\partial t} + v_{x}\frac{\partial h}{\partial x} + v_{y}\frac{\partial h}{\partial y} - v_{z} = a_{s}
+    \end{equation}
+    \begin{itemize}
+    \item $a_{s}$ is the \alert{accumulation-ablation} function
+      \item climatic input from measurements or (melt) models
+    \end{itemize}
+  \end{block}
+  \begin{block}{Base}
+    \begin{equation}
+     \frac{\partial b}{\partial t} + v_{x}\frac{\partial b}{\partial x} + v_{y}\frac{\partial b}{\partial y} - v_{z} = a_{b}
+    \end{equation}
+    \begin{itemize}
+    \item $a_{b}$ is the \alert{basal melt rate}
+      \item often $\partial b/\partial t = 0$
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+  \frametitle{Surface Dynamic Boundary Condition}
+  Continuity of the stress vector
+  \begin{equation}
+    \mathbf{T}\cdot\mathbf{n} = \mathbf{T}_{\text{atm}}\cdot\mathbf{n}
+  \end{equation}
+  \begin{itemize}
+  \item atmospheric pressure and wind stress are small compared to stress in the ice
+  \end{itemize}
+  \begin{equation}
+    \mathbf{T}\cdot\mathbf{n} = 0
+  \end{equation}
+  \begin{itemize}
+  \item this is a \alert{stress-free condition}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Basal Dynamic Boundary Condition}
+  \begin{equation}
+    \mathbf{T}\cdot\mathbf{n} = \mathbf{T}_{\text{lith}}\cdot\mathbf{n} 
+  \end{equation}
+  \begin{itemize}
+  \item unfortunately, we have no information about the stress state of the lithosphere
+  \item this boundary condition is not very useful
+  \item emperical relationship is required
+  \item relate bed-parallel shear stress $\tau_{\text{b}}$ and bed-parallel basal velocity $u_{\text{b}}$
+    \begin{equation*}
+      u_{\text{b}} = f(\tau_{\text{b}})
+    \end{equation*}
+    \item controversial topic, discussed in one of the following lectures
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Basal Dynamic Boundary Condition}
+ \begin{itemize}
+   \item we can distinguish two cases
+     \begin{itemize}
+     \item ice is frozen to the bed if temperature below pressure melting point $T_{\text{m}}$
+     \item ice is sliding if temperature at pressure melting point $T_{\text{m}}$
+     \end{itemize}
+  \end{itemize}
+    \begin{equation*}
+      u_{\text{b}} = \left\{
+        \begin{array}{lcl}
+          0, & T< T_{\text{m}} & \quad \text{Dirichlet condition}\\
+          f(\tau_{\text{b}}), & T= T_{\text{m}} & \quad \text{Robin condition}
+        \end{array}
+        \right.
+    \end{equation*}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Basal Thermodynamic Boundary Condition}
+  \begin{block}{Cold Base}
+    the heat flux into the ice equals the geothermal heat flux $q_{\text{geo}}^{\perp}$
+    \begin{equation*}
+      \mathbf{q} \cdot \mathbf{n} = q_{\text{geo}}^{\perp}
+    \end{equation*}
+  \end{block}
+  \begin{block}{Temperate Base}
+    the ice is at the pressure melting point
+    \begin{equation*}
+      T= T_{\text{m}} 
+    \end{equation*}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Thermomechanically-Coupled Glacier Flow}
+  \begin{block}{Balance Equations}
+    \footnotesize{
+    \begin{equation*}
+      \begin{array}{lrcl}
+        \text{mass} \quad &  \nabla \cdot \mathbf{v}  & = & 0\\[.25em]
+        \text{momentum} \quad &  \nabla \cdot \left(\eta\left(\nabla \mathbf{v} + \nabla \mathbf{v}^{\text{T}}\right)\right)- \nabla p & = &  -\rho\mathbf{g} \\[.25em]
+        \text{temperature} \quad & \rho c\frac{\text{d} T}{\text{d} t} - \nabla \cdot \left(k \nabla T\right) & = &  \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) 
+      \end{array}
+    \end{equation*}
+  }
+  \end{block}
+ \begin{block}{Boundary Conditions} 
+   \footnotesize{
+    \begin{equation*}
+      \begin{array}{lr}
+        \text{mass} \quad &  
+        \begin{array}{rl}
+          \frac{\partial h}{\partial t} + v_{x}\frac{\partial h}{\partial x} + v_{y}\frac{\partial h}{\partial y} - v_{z} = a_{s} & \quad \text{surface} \\[.25em]
+          \frac{\partial b}{\partial t} + v_{x}\frac{\partial b}{\partial x} + v_{y}\frac{\partial b}{\partial y} - v_{z} = a_{b} & \quad \text{base}
+        \end{array}
+        \\[.5em]
+        \text{momentum} \quad & 
+        \begin{array}{rl}
+          \mathbf{T}\cdot\mathbf{n} = 0 & \quad \text{surface} \\[.25em]
+         u_{\text{b}} = \{0,f(\tau_{\text{b}})\} & \quad \text{base}
+        \end{array}        
+        \\[.5em]
+        \text{temperature} \quad & 
+        \begin{array}{rl}
+          T = T_{\text{s}} & \quad \text{surface} \\[.25em]
+          T = T_{\text{m}} \quad  \text{or} \quad \mathbf{q} \cdot \mathbf{n} = q_{\text{geo}}^{\perp }& \quad \text{base}
+        \end{array}
+      \end{array}
+    \end{equation*}
+  }
+ \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modeling}
+   \begin{itemize}
+      \item numerical models
+        \item analytical solutions for further simplified problems
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analytical Solutions}
+   \begin{itemize}
+    \item gravity-driven thin film flow (p. 46\,--\,48)
+    \item analytical solutions for ice sheets (Chapter~5.6)
+      \begin{itemize}
+        \item Vialov profile
+        \item Bueler profile (yes, we have in-house expert)
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 
