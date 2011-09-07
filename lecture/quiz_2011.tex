@@ -1,0 +1,43 @@
+\documentclass[halfparskip]{scrartcl}
+\usepackage{exercise}
+
+\usepackage[automark,headsepline,footsepline]{scrpage2}
+
+% this lets us avoid the scrartcl/hyperref conflict...
+\let\ifvtex\relax
+
+\clearscrheadings	% delete default headings
+\ihead{Glaciers 617: Glacier Dynamics}
+\ohead{FS2011}
+\setkomafont{pagehead}{\normalfont}
+\setkomafont{pagenumber}{\normalfont\rmfamily}
+\cfoot{\thepage}
+
+
+
+
+\begin{document}
+\pagestyle{scrheadings}
+
+\begin{Exercise}[title={Glacier Mechanics},label=coriolis]
+  \Question{You are interested in the flow dynamics of a small valley glacier.}
+  \subQuestion{Do you have to worry about the Coriolis force?}
+  \subQuestion{How do typical vertical profiles of velocity and stress look?}
+\end{Exercise}
+
+\begin{Answer}[ref=coriolis]
+No.
+\end{Answer}
+
+
+\begin{Exercise}[title={Glacier Thermodynamics},label={icetemp}]
+  \Question{Where can you find the warmest ice in a glacier?}
+  \Question{Explain the differences between cold and temperate ice}
+\end{Exercise}
+
+\begin{Answer}[ref=icetemp]
+chabis
+\end{Answer}
+
+
+\end{document}

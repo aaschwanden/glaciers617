@@ -1,5 +1,7 @@
 \documentclass[hide notes,intlimits]{beamer}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
 \mode<presentation>
 {
@@ -21,7 +23,7 @@
 
 % title page
 \title[Glacier Dynamics] % (optional, use only with long paper titles)
-{Mechanics and Thermodynamics of Glaciers}
+{Glacier Dynamics}
 \subtitle{Glaciers 617}
 
 
@@ -34,13 +36,13 @@
 \institute[ARSC] % (optional, but mostly needed)
 {
   %
-  Arctic Region Supercomputing Center\\
+  Geophysical Institute\\
   University of Alaska Fairbanks, USA
 }
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-\date{October 2009}
+\date{October 2011}
 
 
 \subject{Glaciers}
@@ -97,33 +99,39 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Ice Dynamics}
-  unfortunately, \alert{ice dynamics} is
-  \begin{itemize}
-    \item physics
-    \item continuum mechanics
-    \item thermodynamics
-    \item and equations, equations, and more equations
-  \end{itemize}
-\end{frame}
 
 \begin{frame}
   \frametitle{Course Material}
+  FIXME: update
   \begin{itemize}
+    \item lecture is loosely based on a similar lecture by Ed Waddington
     \item notation follows closely \cite{GreveBlatter_disg}
     \item covers parts of Chapters~3\,--\,5.1
     \item page numbers mentioned in these slides refer to page numbers in the book
-    \item \url{http://www.gi.alaska.edu/~aaschwanden/lecture.html}
+    \item \url{http://glaciers.gi.alaska.edu/people/aschwanden/teaching}
   \end{itemize}
   \def\newblock{}
   \bibliography{cryo}
 \end{frame}
 
 
+ 
+\begin{frame}
+  \frametitle{How does a glacier move?}
+  \centering{
+    \includegraphics[width=.65\textwidth]{figures/flow_acc_abl}
+  }
+  \begin{block}{In a nut shell:}
+    \begin{itemize}
+    \item The ice can deform as a viscous fluid
+    \item The ice can slide over its substrate
+    \end{itemize}
+  \end{block}
+\end{frame}
+
 
 \begin{frame}
-  \frametitle{Observations}
+  \frametitle{Measurements \& Observations}
     \begin{block}{1779 Gravitation theory by de~Saussure}
       H.~B. de~Saussure observes sliding
       \begin{itemize}
@@ -140,7 +148,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Observations}
+  \frametitle{Measurements \& Observations}
   \begin{figure}
     \includegraphics[width=8cm]{figures/agassi}%
   \end{figure}
@@ -157,7 +165,7 @@
 
 
 \begin{frame}
-  \frametitle{Observations}
+  \frametitle{Measurements \& Observations}
   \begin{columns}
     \column[C]{4.25cm}
     \includegraphics[width=4cm]{figures/geschw_prof_oberfl}%
@@ -166,71 +174,127 @@
     \column[C]{7.75cm}
     \begin{block}{1864-1930 Viscous flow theory by J.~Forbes}
       \begin{itemize}
-        \item made his own observations on Mer de Glace, France
-          \item glacier flows fastest in the center
-        \item opposes Agassi's theory
-        \item if the dilatation theory were true
-        \item then flow would be greatest at sunset
-        \item and near the glacier margins
+      \item made his own observations on Mer de Glace, France
+      \item glacier flows fastest in the center
+      \item opposes Agassi's theory
+      \item if the dilatation theory were true
+      \item then flow would be greatest at sunset
+      \item and near the glacier margins
       \end{itemize}
     \end{block}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Measuring surface velocities}
+  \begin{columns}
+    \column[C]{4.5cm}
+    \includegraphics[width=4.5cm,angle=270]{figures/geschw_prof_oberfl}%
+   \column[C]{7.5cm}
+     \begin{itemize}
+      \item Measuring angles (with Theodolite) and distances (with Electronic Distance Meter or EDM) from fixed stations on the glacier margins
+        \item GPS (global positioning system)
+        \item feature tracking in repeated aerial photography or satellite images
+     \end{itemize}
  \end{columns}
 \end{frame}
 
- 
-\begin{frame}
-  \frametitle{Questions}
-  \centering{
-    \includegraphics[width=.65\textwidth]{figures/flow_acc_abl}
-  }
- \begin{itemize}
-    \item What determines the glacier shape and extent
-    \item How do ablation, accumulation, ice temperature, and the bedrock topography influence the flow of a glacier
-    \item How does the flow speed vary with depth, along a flowline, or orthogonal to a flowline
-  \end{itemize}
-\end{frame}
 
 \begin{frame}
-  \frametitle{Questions}
-  \centering{
-    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
-  }
- \begin{block}{The two major problems}
-   \begin{enumerate}
-   \item Given the boundary conditions,
+  \frametitle{Measuring surface velocities}
+  \vspace{-2em}
+  \begin{columns}
+    \column[C]{5.5cm}
+    \begin{figure}
+    \includegraphics<1>[width=5.5cm]{figures/insar}%
+    \includegraphics<2>[width=5.5cm]{figures/Joughin2010Fig6a}%
+    \\ \small{credit: USGS, Joughin et al., 2010}
+  \end{figure}
+   \column[C]{6.5cm}
+    \begin{block}{interferometric synthetic aperture radar (InSAR)}
+      \begin{itemize}
+      \item count fringes from a stationary point on bedrock
+     \end{itemize}
+    \end{block}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Measuring borehole tilt}
+  \begin{columns}
+    \column[C]{6.5cm}
+    \includegraphics[width=6cm]{figures/geschw_vert_prof}%
+   \column[C]{4.5cm}
      \begin{itemize}
-     \item basal topography
-     \item accumulation-ablation function
-     \item temperature at the upper ice surface
-     \item geothermal heat flux at the base,
-   \end{itemize}
-   which glacier (geometry) is in equilibrium for given bc's.
-  \item How does the glacier respond to changes in the bc's?
-\end{enumerate}
+      \item with tiltmeter (inclinometer)
+     \end{itemize}
+ \end{columns}
+\end{frame}
+
+\begin{frame}{Kinematic vs. Dynamics}
+  \begin{block}{Kinematic description of flow}
+    In a steady state,
+    \begin{itemize}
+    \item Flow required to transport away upstream accumulation
+    \item Glacier has to adjust its shape to make this flow happen
+    \item[$\Rightarrow$] Rheological properties don't figure in kinematic description
+    \end{itemize}
+  \end{block}
+  \begin{block}{Dynamic description of flow}
+    \begin{itemize}
+    \item ice is a material with certain rheological properties (e.g. viscosity)
+    \item Flow is determined by stresses applied to it
+    \item[$\Rightarrow$] Accumulation/ablation don't figure in dynamic description
+    \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Answer}
-  \centering{
-    \includegraphics[width=.5\textwidth]{figures/flow_acc_abl}
-  }
-
- \begin{block}{Solution: Continuum Mechanics \& Rheology}
-   \begin{itemize}
-     \item Solve balance equations for
-       \begin{itemize}
-       \item mass
-       \item linear and angular momentum
-       \item energy
-       \item (forget about entropy)
-       \end{itemize}
-     \item Define constitutive equations
-  \end{itemize}
-  \note{useful stuff, not only for ice dynamics. recently applied by Truffer to solve a surface mass balance problem}
-\end{block}
+\begin{frame}{``Glacier Flow'' Chart}
+  \begin{figure}
+    \centering{
+      \input{figures/glacierflowchart.tikz}
+    }
+  \end{figure}
 \end{frame}
 
+
+\begin{frame}{Why is it so hard to predict the future of an ice sheet?}
+  \begin{block}{It's easy because}
+   \begin{itemize}
+    \item composed of a single, largely homogenous material
+    \item viscous flow is governed by the Navier-Stokes equations (19th century physics)
+    \item move very slowly (turbulence, Coriolis force, and other inertial effects can be ignored)
+   \end{itemize}
+  \end{block}
+  \begin{block}{It's so hard because}
+   \begin{itemize}
+    \item the stress resisting ice flow at the base can vary by orders of magnitude
+    \item ocean interactions could trigger instabilities
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Forces}
+  \begin{itemize}
+  \item forces exist inside continous bodies such as a glacier
+  \item these forces can cause a glacier to deform
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What is stress?}
+  ``Stress'' is the force per unit area acting on a material
+  \begin{displaymath}
+    \sigma = \frac{F}{A}
+  \end{displaymath}
+  Inside a glacier, stresses are due to
+  \begin{itemize}
+  \item weight of the overlying ice (overburden pressure)
+  \item shape of the glacier surface (pressure gradients)
+  \end{itemize}
+\end{frame}
 
 \section{Balance Equations}
 

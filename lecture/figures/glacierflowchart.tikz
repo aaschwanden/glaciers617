@@ -1,0 +1,27 @@
+\tikzstyle{block} = [rectangle, draw, fill=light blue, 
+    text width=5em, text centered]
+\tikzstyle{today} = [rectangle, draw, fill=uaf blue, 
+    text width=5em, text centered, rounded corners]
+\tikzstyle{cloud} = [draw, ellipse,fill=light yellow,
+    minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+    
+\begin{tikzpicture}[node distance = 1.5cm, auto]
+    % Place nodes
+    \node [block] (climate) {climate};
+    \node [cloud, below of=climate] (meteo) {meteorological process};
+    \node [block, below of=meteo] (mass balance) {mass balance};
+    \node [cloud, below of=mass balance] (dynamics) {ice dynamics processes};
+    \node [today, left of=dynamics, node distance=5cm] (today) {this lecture};
+    \node [block, below of=dynamics] (geometry) {glacier geometry};
+    \node [right of=dynamics,node distance=5cm] (dummy) {};
+    % Draw edges
+    \path [line] (climate) -- (meteo);
+    \path [line] (meteo) -- (mass balance);
+    \path [line] (mass balance) -- (dynamics);
+    \path [line] (dynamics) -- (geometry);
+    \path [line] (today) -- (dynamics);
+    \path [line] (geometry) -| (dummy);
+    \path [line] (dummy) |- (mass balance);
+    \path [line,dashed] (dummy) |- (climate);
+  \end{tikzpicture}
