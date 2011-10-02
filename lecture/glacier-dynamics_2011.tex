@@ -102,14 +102,10 @@
 
 \begin{frame}
   \frametitle{Course Material}
-  FIXME: update
-  \begin{itemize}
-    \item lecture is loosely based on a similar lecture by Ed Waddington
-    \item notation follows closely \cite{GreveBlatter_disg}
-    \item covers parts of Chapters~3\,--\,5.1
-    \item page numbers mentioned in these slides refer to page numbers in the book
-    \item \url{http://glaciers.gi.alaska.edu/people/aschwanden/teaching}
-  \end{itemize}
+ \begin{itemize}
+    \item lecture is based on a similar lecture by Ed Waddington
+    \item book recommendation: \cite{GreveBlatter_disg}
+ \end{itemize}
   \def\newblock{}
   \bibliography{cryo}
 \end{frame}
@@ -279,6 +275,7 @@
 
 \begin{frame}{Forces}
   \begin{itemize}
+  \item a force is any influence that causes an object to undergo a change in speed, a change in direction, or a change in shape
   \item forces exist inside continous bodies such as a glacier
   \item these forces can cause a glacier to deform
   \end{itemize}
@@ -319,6 +316,208 @@
       \end{itemize}
     \end{block}
   \end{columns}
+\end{frame}
+
+
+\begin{frame}{Magnitudes of stress \& forces}
+  Again, stress is force / (unit area)
+     \begin{itemize}
+      \item frictionless table
+      \item water bottle in free fall
+      \item stretching a rubber band
+      \end{itemize}
+\end{frame}
+
+\begin{frame}{Pressure in a glacier}
+  mass $m = \rho V$
+     \begin{itemize}
+      \item $\rho$ = ice density $\approx$ 900\,kg\,m$^{-3}$
+      \item$V$ = Volume = Area $\times$ depth = $A \cdot z$
+     \end{itemize}
+     So pressure $p$ at depth $z$ is
+     \begin{displaymath}
+       p = \frac{m \cdot g}{A} = \frac{\rho \cdot A \cdot z \cdot g}{A} = \rho g z
+     \end{displaymath}
+     How deep do we have to drill into a glacier before the ice pressure is 1 atmosphere?
+\end{frame}
+
+
+\begin{frame}{Depth for 1\,atm pressure?}
+    \begin{displaymath}
+       z = \frac{p}{\rho\cdot g} = ?
+     \end{displaymath}
+     \begin{itemize}
+     \item  So pressure rises by 1\,atm for every \alert{$x$}\,meters of depth in a glacier
+     \item Does ice deform in response to this pressure?
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Shear stress $\tau$}
+  Total force from ice column:
+    \begin{displaymath}
+       F = m\,g = \rho V g = \rho\,g\,h
+     \end{displaymath}
+     \begin{itemize}
+     \item How much of this weight will contribute to shear deformation?
+    \end{itemize}
+    FIXME: figure with slope and shear- \& normal stress
+    \begin{itemize}
+     \item shear stress $\tau = \rho\,g\,h\,\sin{\alpha}$
+     \item normal stress $\sigma = \rho\,g\,h\,\cos{\alpha}$
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Shear stress in a glacier}
+   \begin{displaymath}
+     \tau = \rho\,g\,h\,\sin{\alpha}
+     \end{displaymath}
+     \begin{itemize}
+     \item $h$ = 130\,m
+     \item $\alpha$ = 5$^{\circ}$
+    \end{itemize}
+    Shear stress at the glacier base, $\tau_{b}$, is
+\end{frame}
+
+
+\begin{frame}{Are glacier thickness and slope related?}
+  Suppose a glacier becomes thicker or steeper due to mass imbalance:
+  \begin{itemize}
+    \item it flows faster
+    \item it quickly reduces thickness $h$ or slope $\alpha$, until $\tau_{b} \approx$ 1\,bar again
+  \end{itemize}
+  Can we then estimate glacier thickness ($z=h$) from its slope if we know $\tau_{b} \approx$ 1\,bar?
+  \begin{displaymath}
+    \tau = \rho\,g\,z\,\sin{\alpha} \quad \Rightarrow \quad h \sim \frac{\tau_{b}}{\rho\,g\,\sin{\alpha}}
+  \end{displaymath}
+\end{frame}
+
+
+\begin{frame}{Strain rate $\dot\varepsilon$}
+  \begin{figure}
+  \includegraphics[width=7cm]{figures/fig_4_04}
+  \end{figure}
+  shear strain $\varepsilon = \frac{1}{2}\left( \frac{\Delta x}{\Delta z}\right)$
+  \begin{displaymath}
+    \dot \varepsilon= 1/2 \gamma
+  \end{displaymath}
+  shear strain 
+\begin{displaymath}
+\dot \varepsilon = 1/2\,\left( \frac{\Delta x / \Delta z}{\Delta t}\right) = 1/2\,\left( \frac{\Delta u}{\Delta z}\right)
+\end{displaymath}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Material Science}
+  \begin{block}{Rheology}
+    \begin{itemize}
+    \item is the study of the flow of complex liquids or the deformation of soft solids.
+    \item different materials respond differently to applied stresses
+    \item We are not going through this in great detail.
+    \item[$\Rightarrow$] For further information, consult the handout or
+      \item take Martin Truffers ``Ice Physics 614''  class
+    \end{itemize}
+  \end{block}
+  \begin{block}{We need to define}
+    \begin{itemize}
+   \item a relationship between stress and strain, $\tau = f(\dot \varepsilon)$
+   \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\subsection{Shear Experiment}
+
+\begin{frame}
+  \frametitle{Example: Shear Experiment}
+  \begin{itemize}
+    \item apply constant shear stress $\boldsymbol{\tau}$
+\end{itemize}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
+  \begin{itemize}
+    \item initial elastic deformation
+    \item primary creep: shear rate $\dot\gamma$ decreases with time
+    \item \alert{secondary creep}: shear rate remains constant
+    \item acceleration phase
+    \item tertiary creep: constant shear rate (but higher) 
+ \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Example: Shear Experiment}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
+  \vskip1em
+  This suggests that
+  \begin{itemize}
+  \item the shear rate is a function of the applied shear stress, temperature $T$, and pressure $p$
+    \begin{equation}
+      \dot\gamma = \dot\gamma\left(\tau,T,p\right)
+    \end{equation}
+   \end{itemize}
+ \end{frame}
+
+
+\begin{frame}
+  \frametitle{Example: Shear Experiment}
+  \begin{columns}
+    \column[c]{8cm}
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_04}
+    \end{figure}
+    \column[c]{5cm}
+    $\tau$ is the applied shear stress\\
+    $\gamma$ is the shear angle\\
+    $\dot\gamma$ is the shear rate
+  \end{columns}
+  \vskip1em
+  \begin{itemize}
+  \item The dynamic viscosity $\eta$ relates shear stress and shear rate
+    \begin{equation}
+      \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
+    \end{equation}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Constitutive behavior of ice}
+  \begin{displaymath}
+    \dot \varepsilon = A(T,p)\,\tau^{n-1}\tau
+  \end{displaymath}
+  \\
+  \begin{equation*}
+    \begin{array}{rcll}
+      A(T,p) & = & A_{0} e^{-(Q+pV)/T} &\qquad \text{Arrhenius law}
+    \end{array}
+  \end{equation*}
+  \begin{itemize}
+  \item $A$ is called \alert{rate factor} (ice softness)
+  \item $Q$ and $V$ are the activation energy and the volume, respectively
+  \item $n$ is the exponent of the flow law, usually taken as $n=3$
+  \end{itemize}
+  \vskip1em
+  This is known as \alert{Glen's flow law} or \alert{Glen-Steinemann flow law} but similar to Norton's flow law for the flow of steel at high temperatures
 \end{frame}
 
 
