@@ -395,17 +395,17 @@
 \end{frame}
 
 
-\begin{frame}{Strain rate $\dot\varepsilon$}
+\begin{frame}{Strain rate $\dot\gamma$}
   \begin{figure}
   \includegraphics[width=7cm]{figures/fig_4_04}
   \end{figure}
-  shear strain $\varepsilon = \frac{1}{2}\left( \frac{\Delta x}{\Delta z}\right)$
+  shear strain $\gamma = \frac{1}{2}\left( \frac{\Delta x}{\Delta z}\right)$
   \begin{displaymath}
-    \dot \varepsilon= 1/2 \gamma
+    \dot \gamma= 1/2 \gamma
   \end{displaymath}
   shear strain 
 \begin{displaymath}
-\dot \varepsilon = 1/2\,\left( \frac{\Delta x / \Delta z}{\Delta t}\right) = 1/2\,\left( \frac{\Delta u}{\Delta z}\right)
+\dot \gamma = 1/2\,\left( \frac{\Delta x / \Delta z}{\Delta t}\right) = 1/2\,\left( \frac{\Delta u}{\Delta z}\right)
 \end{displaymath}
 \end{frame}
 
@@ -423,7 +423,7 @@
   \end{block}
   \begin{block}{We need to define}
     \begin{itemize}
-   \item a relationship between stress and strain, $\tau = f(\dot \varepsilon)$
+   \item a relationship between shear stress and shear strain rate, $\tau = f(\dot \gamma)$
    \end{itemize}
   \end{block}
 \end{frame}
@@ -472,9 +472,9 @@
   This suggests that
   \begin{itemize}
   \item the shear rate is a function of the applied shear stress, temperature $T$, and pressure $p$
-    \begin{equation}
+    \begin{equation*}
       \dot\gamma = \dot\gamma\left(\tau,T,p\right)
-    \end{equation}
+    \end{equation*}
    \end{itemize}
  \end{frame}
 
@@ -494,9 +494,9 @@
   \vskip1em
   \begin{itemize}
   \item The dynamic viscosity $\eta$ relates shear stress and shear rate
-    \begin{equation}
+    \begin{equation*}
       \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
-    \end{equation}
+    \end{equation*}
   \end{itemize}
 \end{frame}
 
@@ -504,85 +504,158 @@
 \begin{frame}
   \frametitle{Constitutive behavior of ice}
   \begin{displaymath}
-    \dot \varepsilon = A(T,p)\,\tau^{n-1}\tau
+    \dot \gamma = 2\,A(T,p)\,\tau^{n-1}\tau
   \end{displaymath}
   \\
   \begin{equation*}
     \begin{array}{rcll}
-      A(T,p) & = & A_{0} e^{-(Q+pV)/T} &\qquad \text{Arrhenius law}
+      A(T,p) & = & A_{0} e^{-Q/(RT)} &\qquad \text{Arrhenius law}
     \end{array}
   \end{equation*}
   \begin{itemize}
   \item $A$ is called \alert{rate factor} (ice softness)
-  \item $Q$ and $V$ are the activation energy and the volume, respectively
+  \item $Q$ and $R$ are the activation energy and the gas constant, respectively
   \item $n$ is the exponent of the flow law, usually taken as $n=3$
   \end{itemize}
   \vskip1em
   This is known as \alert{Glen's flow law} or \alert{Glen-Steinemann flow law} but similar to Norton's flow law for the flow of steel at high temperatures
 \end{frame}
 
-\begin{frame}{Thin-film flow}
-     \begin{figure}
-       \includegraphics[width=7cm]{figures/fig_3_11}
+\begin{frame}
+  \frametitle{Temperature dependence}
+  With some emperically-derived values for Q we get:
+    \begin{figure}
+      \includegraphics[width=6cm]{figures/fig_4_05}
     \end{figure}
+    \begin{itemize}
+      \item ice at 0\,$^{\circ}$C is about 1000$\times$ softer than ice at -50\,$^{\circ}$C
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Thin-film flow}
+  \begin{figure}
+    \includegraphics[width=7cm]{figures/fig_3_11}
+  \end{figure}
+  \begin{equation*}
+    \begin{array}{ccl}
+      \frac{\partial u}{\partial z}  & = &  2\,A(T,p)\,\tau^{n-1}\tau \qquad \Rightarrow \\[1em]
+      u_{h} - u_{b} &  = & \int_{0}^{h} 2\,A\left(\rho\,g\,\sin{\alpha}\right)^{n}\,dz =
+    \end{array}
+  \end{equation*}
 \end{frame}
 
 
-\section{Balance Equations}
+\begin{frame}{Recap}
+  \begin{itemize}
+    \item so far, we have only considered shear stresses 
+    \item while they are often the \emph{most} important ones in glacier flow,
+    \item there are other stresses (e.g. normal stresses) which can be important too
+    \item let's step back and look at the bigger picture
+    \item yep, we will need basic calculus and some continuum mechanics
+  \end{itemize}
+\end{frame}
+
+
+\section{Field equations for ice flow}
 
 \begin{frame}
-  \frametitle{General Balance Equations}
-  \begin{block}{In integral form}
-    \begin{eqnarray}
-      \frac{\text{d} }{\text{d} t} \int_{\omega} g \, \text{d} v & = & - \oint_{\partial \omega} \boldsymbol{\phi} \cdot \mathbf{n} \, \text{d} a +  \int_{\omega} \left(p + s\right) \, \text{d} v \\
-      & = & - \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v +  \int_{\omega} \left(p + s\right) \, \text{d} v
+  \frametitle{General Balance Laws}
+  The flow of glacier ice can be described using concepts from classical continuum mechanis:
+  \begin{block}{Balance Laws}
+    \begin{itemize}
+    \item balance of mass
+    \item balance of linear momentum
+    \item balance of angular momentum
+    \item balance of energy
+    \end{itemize}
+  \end{block}
+  \begin{block}{Material Laws / Constitutive Equations / Closures}
+    \begin{itemize}
+      \item often obainted from experiments and theoretical considerations (such as material objectivity)
+   \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{General Balance Laws}
+  Imagine a volume $\Omega$ enclosed by a boundary $\partial \Omega$
+   \begin{eqnarray}
+      G(t) &=& \int_{\Omega} g(x,t)\,d v \\
+      S(t) &=& \int_{\Omega} s(x,t)\,d v
     \end{eqnarray}
     \begin{columns}
       \column[C]{0.1cm}
-      $g$ \\
-      $\boldsymbol{\phi}$ \\
-      $p$ \\
-      $s$ \\
-      \column[C]{6cm}
-      physical quantity \\
-      flux of $g$ through the boundary \\
-      production of $g$ \\
-      supply of $g$
-    \end{columns}
-    \begin{itemize}
-      \item check p. 26\,--\,27 for a derivation
-      \end{itemize}
-  \end{block}
+      $G,g$ \\
+      $S,s$ \\
+     \column[C]{6cm}
+      physical quantity and density\\
+      supply and density \\
+   \end{columns}
+\end{frame}
 
+
+\begin{frame}
+  \frametitle{General Balance Laws}
+  $G$ can only change if
+ \begin{itemize}
+   \item if there is a supply $S$ within $\Omega$
+   \item if there is a flux $F$ of $G$ through the boundary $\partial \Omega$
+  \end{itemize}
+  \begin{equation}
+   F(t) = \oint_{\partial \Omega} \left(g\mathbf{v} + \phi(x,t)\right) \cdot \mathbf{n}\,da
+   \end{equation}
+    \begin{columns}
+      \column[C]{0.1cm}
+      $g\mathbf{v}$ \\
+      $\phi(x,t)$ \\
+     \column[C]{7cm}
+      transport of $g$ with velocity $\mathbf{v}$ through $\partial \Omega$\\
+      flux density (defined later) \\
+   \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{General Balance Laws}
+  \begin{itemize}
+ \item General balance law is:
+  \end{itemize}
+  \begin{eqnarray}
+    \frac{dG}{dt} &=& S - F \\[1em]
+    \frac{d}{dt} \int_{\Omega} g(t)\,dv &=& \int_{\Omega} s(x,t)\,d v - \oint_{\partial \Omega} \left(g\mathbf{v} + \phi\right) \cdot \mathbf{n}\,da
+  \end{eqnarray}
 \end{frame}
 
 \begin{frame}
-  \frametitle{General Balance Equation}
-  \begin{block}{In local form}
-    \begin{equation}
-      \frac{\partial g}{\partial t} = - \nabla \cdot \left(\boldsymbol{\phi} + g\mathbf{v}\right) + p + s
-    \end{equation}
-    \begin{columns}
-      \column[C]{0.1cm}
-      $g$ \\
-      $\boldsymbol{\phi}$ \\
-      $p$ \\
-      $s$ \\
-      \column[C]{6cm}
-      physical quantity \\
-      flux of $g$ through the boundary \\
-      production of $g$ \\
-      supply of $g$
-    \end{columns}
-  \end{block}
-  use
+  \frametitle{General Balance Laws}
   \begin{itemize}
-    \item Reynolds transport theorem
-    \item Divergence theorem
-    \end{itemize}
-    to go back and forth
+  \item Assume that $G \ne G(t)$ thus integral and differential can be exchanged
+  \item Use Gauss' Theorem:
+    \begin{displaymath}
+      \oint_{\partial \Omega} \left(g\mathbf{v} + \phi\right) \cdot \mathbf{n}\,da = \int_{\Omega} \nabla \cdot \left(g\mathbf{v} + \phi\right)\,dv
+   \end{displaymath}
+  \item We can then write
+  \end{itemize}
+  \begin{eqnarray}
+   \int_{\Omega} \frac{\partial g}{\partial t}\,dv &=& \int_{\Omega} s(x,t)\,d v - \int_{\Omega} \nabla \cdot \left(g\mathbf{v} + \phi\right)\,dv
+  \end{eqnarray}
 \end{frame}
 
+\begin{frame}
+  \frametitle{General Balance Laws}
+  \begin{itemize}
+  \item We made no assumption about the shape and size of $\Omega$ 
+  \item We can make $\Omega$ infinitely small
+  \end{itemize}
+  \begin{equation}
+    \frac{\partial g}{\partial t} = s(t)- \nabla \cdot \left(g\mathbf{v} + \phi\right)
+  \end{equation}
+  or
+  \begin{equation}
+    \frac{d g}{d t} = \frac{\partial g}{\partial t} + \mathbf{v}\cdot \nabla g = s(t)- \nabla \cdot  \left(\mathbf{v} + \phi\right)
+  \end{equation}
+\end{frame}
 
 \subsection{Mass Balance}
 
@@ -595,24 +668,23 @@
       \column[C]{1cm}
       $g = \rho$ \\
       $\boldsymbol{\phi} =0 $ \\
-      $p = 0$ \\
-      $s = 0$ \\
+     $s = 0$ \\
       \column[C]{6cm}
       mass density \\
       flux of $g$ through the boundary \\
-      production of $g$ \\
-      supply of $g$
+     supply of $g$
     \end{columns}
     \vskip1em
     from the above we get
    \begin{equation}
-      \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \, \text{d} v = 0
-    \end{equation} or in local form ($\mathbf{v}$ is the velocity)
-    \begin{equation}
       \frac{\partial \rho}{\partial t} + \nabla \cdot \left(\rho \mathbf{v}\right) = 0
     \end{equation}
-    $\Rightarrow$ known as the \alert{continuity equation}
-\end{frame}
+    $\Rightarrow$ known as the \alert{continuity equation}\\
+    We assume ice is \emph{incompressible} (density does not change), then
+    \begin{equation}
+      \nabla \cdot \mathbf{v} = 0
+    \end{equation}
+  \end{frame}
 
 
 \subsection{Momentum Balance}
@@ -630,6 +702,38 @@
   \item $\mathbf{T}$ is the \alert{Cauchy stress tensor}
   \item external forces $\mathbf{f}$ are, e.g. gravity or the Coriolis force
   \end{itemize}    
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Cauchy Stress Tensor}
+  We've already introduced shear stress, but forces can be applied on different faces and in different directions
+  \begin{columns}
+    \column[c]{6cm}
+    \begin{figure}
+      \includegraphics[width=5.cm]{figures/fig_3_08}
+    \end{figure}
+    \column[c]{5cm}
+  \begin{displaymath} 
+    \mathbf{T} = \left( 
+      \begin{array}{ccc} 
+        t_{xx} & t_{xy} & t_{xz} \\ 
+        t_{yx} & t_{yy} & t_{yz} \\ 
+        t_{zx} & t_{zx} & t_{zz} 
+      \end{array} 
+    \right) 
+  \end{displaymath}
+  \end{columns}
+  \vskip1em
+  For example
+$    \mathbf{t}_{\mathbf{e}_{z}} =
+    \left(
+      \begin{array}{c}
+        t_{xz}\\
+        t_{yz}\\
+        t_{zz}
+      \end{array}
+    \right)
+ $ is the stress vector of a cut along the xy-plane
 \end{frame}
 
 
