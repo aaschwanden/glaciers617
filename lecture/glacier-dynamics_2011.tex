@@ -722,7 +722,10 @@
       \end{array} 
     \right) 
   \end{displaymath}
-  \end{columns}
+  \begin{itemize}
+  \item We identify $\tau = t_{xy}$
+  \end{itemize}
+\end{columns}
   \vskip1em
   For example
 $    \mathbf{t}_{\mathbf{e}_{z}} =
@@ -739,28 +742,39 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 
 \begin{frame}
   \frametitle{Momentum Balance}
-  from the previous we get
-  \begin{eqnarray}
-    \frac{\text{d}}{\text{d} t} \int_{\omega} \rho \mathbf{v}\, \text{d} v & = & - \oint_{\partial \omega} \mathbf{T} \cdot \mathbf{n} \, \text{d} a + \int_{\omega} \mathbf{f} \, \text{d} v \\
-    & & -\int_{\omega} \nabla \cdot \mathbf{T}\, \text{d} v + \int_{\omega} \mathbf{f} \, \text{d} v
-  \end{eqnarray} or in local form
-  \begin{equation}
+ \begin{equation}
+   \frac{\partial \left(\rho \mathbf{v}\right)}{\partial t}  = -\nabla \cdot \left(\rho \mathbf{v}\otimes\mathbf{v}\right) + \nabla \cdot \mathbf{T} + \mathbf{f}
+  \end{equation}
+  By using the mass balance, we can write
+ \begin{equation}
     \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = -\nabla \cdot \mathbf{T} + \mathbf{f}
   \end{equation}
   \begin{columns}
     \column[C]{2cm}
     $g = \rho \mathbf{v}$ \\
     $\boldsymbol{\phi} = - \mathbf{T} $ \\
-    $p = 0$ \\
     $s = \mathbf{f}$ \\
     \column[C]{6cm}
       momentum density \\
       flux of $g$ through the boundary \\
-      production of $g$ \\
-      supply of $g$
+     supply of $g$
     \end{columns}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Momentum Balance}
+  For glacier ice, we assume
+  \begin{itemize}
+  \item ice is incompressible
+  \item acceleration term $\frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t}$ can be neglected
+  \end{itemize}
+  \vspace{1em}
+  The momentum balance for glacier flow is
+  \begin{equation}
+    \nabla \cdot \mathbf{T} + \mathbf{f} = \nabla \cdot \mathbf{T} + \rho \mathbf{g} = 0
+  \end{equation}
+\end{frame}
 
 \subsection{Angular Momentum Balance}
 
