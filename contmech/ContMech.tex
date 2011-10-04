@@ -357,7 +357,7 @@ integral form of the balance law then reduces to its local form
 \pder{g}{t} = s(t) - (g v_i + \phi_i)_{,i} 
 \end{equation}
 All that remains now is to identify the relevant terms for $g$, $s$,
-and $phi$.
+and $\phi$.
 
 \subsection{Conservation of mass}
 
@@ -462,7 +462,7 @@ The energy density is given by
 g = \rho (u + \frac{v^2}{2})
 \end{equation}
 The first term is the inner energy, while the second one is the
-kinetic energy. There is a supply of energy, which is the given by the
+kinetic energy. There is a supply of energy, which is given by the
 work done by gravity:
 
 \begin{equation}
@@ -511,14 +511,18 @@ where $D_{ij} = 1/2 (v_{i,j} + v_{j,i})$ is the strain rate tensor.
 
 This leaves us with the following equation for energy conservation. 
 
-\begin{equation}
+\begin{equation} \label{eq:energy-balance-sc}
 \rho \frac{du}{dt} = - q_{i,i} + t_{ij}D_{ij}
 \end{equation}
 or
 
-\begin{equation}
+\begin{equation} \label{eq:energy-balance}
 \rho \frac{du}{dt} = - \nabla \cdot \mathbf{q} + \Tr (\mathbf{tD})
 \end{equation}
+Strictly speaking, however, only $u + \frac{v^2}{2}$ is conserved, so
+we should call Equations~\eqref{eq:energy-balance-sc} and
+\eqref{eq:energy-balance} ``energy balance equation'' instead.
+
 
 \section{Summary of conservation equations}
 

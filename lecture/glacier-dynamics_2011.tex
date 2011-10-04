@@ -90,6 +90,8 @@
 }
 }
 
+%\includeonlylecture{Part I}
+
 \begin{document}
 
 \setbeamertemplate{background canvas}
@@ -114,6 +116,7 @@
      \tikz{\node[inner sep=0pt,opacity=1.0] {\includegraphics[height=
 \paperheight,width=\paperwidth]{figures/yakutat_sunset}};}
 } 
+
 
 \begin{frame}[plain] % not in the handout
   \begin{columns}
@@ -143,6 +146,7 @@
   \def\newblock{}
   \bibliography{cryo}
 \end{frame}
+
 
 
 \lecture{Introduction to glacier flow}{Part I}
@@ -580,14 +584,32 @@
       u_{h} - u_{b} &  = & \int_{0}^{h} 2\,A\left(\rho\,g\,\sin{\alpha}\right)^{n}\,dz =
     \end{array}
   \end{equation*}
+  \\[.75em]
+  We assume $u_b=0$, i.e. glacier is frozen to the bed
 \end{frame}
 
+
+\begin{frame}{Basal sliding}
+  Despite decades of intensive research, basal sliding remains one of the grand unsolved problems. We know:
+  \begin{itemize}
+  \item sliding is a function of basal water pressure and bed roughness
+  \item if ice is underlain by till, experiments suggest a plastic or nearly-plastic behavior
+  \end{itemize}
+  \vspace{1em}
+  \begin{columns}
+    \column[C]{7.5cm}
+    \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+      Beyond the scope of this lecture
+    \end{beamercolorbox}
+  \end{columns}
+\end{frame}
 
 \begin{frame}{Recap}
   \begin{itemize}
     \item so far, we have only considered shear stresses 
     \item while they are often the \emph{most} important ones in glacier flow,
     \item there are other stresses (e.g. normal stresses) which can be important too
+    \item we have assumed ice surface and bed surface are parallel
     \item let's step back and look at the bigger picture
     \item yep, we will need basic calculus and some continuum mechanics
   \end{itemize}
