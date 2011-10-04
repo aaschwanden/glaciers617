@@ -5,7 +5,7 @@
 
 \mode<presentation>
 {
-  \usetheme[headline,footline]{UAFshade}
+  \usetheme[footline]{UAFshade}
   \setbeamercovered{transparent}
 }
 
@@ -20,12 +20,26 @@
 \usepackage{natbib}
 \bibliographystyle{andy}
 
+\definecolor{uaf red}{HTML}{E41A1C}
+\definecolor{uaf blue}{HTML}{377EB8}
+\definecolor{uaf green}{HTML}{4DAF4A}
+\definecolor{uaf violet}{HTML}{984EA3}
+\definecolor{uaf orange}{HTML}{FF7F00}
+\setbeamercolor{boxed}{fg=black,bg=uaf yellow}
+
+\usetikzlibrary{shadows}
+
+
+\newenvironment{transbox}{%
+\begin{tikzpicture}
+\node[drop shadow,rounded corners,text width=\textwidth,fill=white, fill opacity=0.75,text opacity=1] \bgroup
+}{
+\egroup;\end{tikzpicture}} 
 
 % title page
 \title[Glacier Dynamics] % (optional, use only with long paper titles)
 {Glacier Dynamics}
 \subtitle{Glaciers 617}
-
 
 \author[Aschwanden] % (optional, use only with lots of authors)
 {Andy Aschwanden}
@@ -48,13 +62,13 @@
 \subject{Glaciers}
 
 % define what is shown at the beginning of each section
-\AtBeginSection[]
-{
- \begin{frame}<beamer>
-   \frametitle{Outline}
-   \tableofcontents[currentsection,subsectionstyle=hide/hide/hide]
- \end{frame}
-}
+% \AtBeginSection[]
+% {
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,subsectionstyle=hide/hide/hide]
+%  \end{frame}
+% }
 
 % define what is shown at the beginning of each subsection
 % \AtBeginSubsection[]
@@ -65,45 +79,65 @@
 %  \end{frame}
 % }
 
+\AtBeginLecture{
+  \frame{
+    \begin{columns}
+      \column[C]{7.5cm}
+      \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+      \centering{\Large \bf \color{uaf blue}{\insertlecture}}
+    \end{beamercolorbox}
+  \end{columns}
+}
+}
+
 \begin{document}
+
+\setbeamertemplate{background canvas}
+  {
+     \tikz{\node[inner sep=0pt,opacity=1.0] {\includegraphics[width=\paperwidth]{uaf_beamer_shade_bg}};}
+} 
 
 % insert titlepage
 \begin{frame}
   \titlepage
 \end{frame}
 
-% insert TOC
-\begin{frame}
- \frametitle{Outline}
- \tableofcontents[subsectionstyle=hide]
-  %You might wish to add the option [pausesections]
-\end{frame}
-
-\section{Introduction}
+\setbeamertemplate{background canvas}
+{
+%
+} 
 
 
-%{
-%\setbeamertemplate{headline}[default]
-%\begin{frame}
-%  \frametitle{Why}
-%  The flow of glaciers and ice sheets is an interesting, non-trival problem in fluid dynamics
-%\end{frame}
-%} 
+
+\setbeamertemplate{background canvas}
+  {
+     \tikz{\node[inner sep=0pt,opacity=1.0] {\includegraphics[height=
+\paperheight,width=\paperwidth]{figures/yakutat_sunset}};}
+} 
 
 \begin{frame}[plain] % not in the handout
-  \begin{figure}
-    \pgfputat{\pgfxy(-.39,.25)}{
-    \includegraphics<1| handout: 0>[width=\paperwidth]{figures/gorner}%
-    \includegraphics<2>[width=\paperwidth]{figures/gorner_clarke}%    
-  }
-  \end{figure}
+  \begin{columns}
+    \column[C]{7.5cm}
+  \begin{transbox}
+    ``The tradition of glacier studies that we inherit draws upon two great legacies of the eighteenth and nineteenth centuries: classical physics and romatic enthusiasm for Nature.\\[.25em]
+\ldots It is easy to undervalue the romantic contribution, but in glaciology, it would be a mistake to do so'' \\[.5em]
+\emph{Garry Clark, J. Glaciol., 1987)}
+  \end{transbox}
+\end{columns}
 \end{frame}
+
+
+\setbeamertemplate{background canvas}
+{
+%
+} 
 
 
 \begin{frame}
   \frametitle{Course Material}
  \begin{itemize}
-    \item lecture is based on a similar lecture by Ed Waddington
+    \item lecture is based on lectures by Ed Waddington \& Martin Truffer
+    \item Martin's ``Continuum Mechanics'' script
     \item book recommendation: \cite{GreveBlatter_disg}
  \end{itemize}
   \def\newblock{}
@@ -111,6 +145,9 @@
 \end{frame}
 
 
+\lecture{Introduction to glacier flow}{Part I}
+
+\section{Measurements \& Observations}
  
 \begin{frame}
   \frametitle{How does a glacier move?}
@@ -149,7 +186,7 @@
   \begin{figure}
     \includegraphics[width=8cm]{figures/agassi}%
   \end{figure}
-    \begin{block}{1840-1846 Dilatation theory by L. Agassi}
+    \begin{block}{1840-1846 Dilatation theory by L. Agassiz}
       \begin{itemize}
         \item glacier ice contains innumerable fissures and capillary tubes
         \item during the day, these tubes absorb the water
@@ -274,10 +311,12 @@
 \end{frame}
 
 
+\section{Forces, Stress \& Strain}
+
 \begin{frame}{Forces}
   \begin{itemize}
   \item a force is any influence that causes an object to undergo a change in speed, a change in direction, or a change in shape
-  \item forces exist inside continous bodies such as a glacier
+  \item forces exist inside continuous bodies such as a glacier
   \item these forces can cause a glacier to deform
   \end{itemize}
 \end{frame}
@@ -355,15 +394,12 @@
 
 
 \begin{frame}{Shear stress $\tau$}
-  Total force from ice column:
+  Total stress $t$ from ice column:
     \begin{displaymath}
-       F = m\,g = \rho V g = \rho\,g\,h
+       t = \rho V g = \rho\,g\,h
      \end{displaymath}
      \begin{itemize}
      \item How much of this weight will contribute to shear deformation?
-    \end{itemize}
-    FIXME: figure with slope and shear- \& normal stress
-    \begin{itemize}
      \item shear stress $\tau = \rho\,g\,h\,\sin{\alpha}$
      \item normal stress $\sigma = \rho\,g\,h\,\cos{\alpha}$
     \end{itemize}
@@ -371,16 +407,18 @@
 
 
 \begin{frame}{Shear stress in a glacier}
-   \begin{displaymath}
-     \tau = \rho\,g\,h\,\sin{\alpha}
-     \end{displaymath}
-     \begin{itemize}
-     \item $h$ = 130\,m
-     \item $\alpha$ = 5$^{\circ}$
-    \end{itemize}
-    Shear stress at the glacier base, $\tau_{b}$, is
+  \begin{itemize}
+  \item $h$ = 130\,m
+  \item $\alpha$ = 5$^{\circ}$
+  \end{itemize}
+  \begin{displaymath}
+    \tau = \rho\,g\,h\,\sin{\alpha}
+  \end{displaymath}
+  \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+    Shear stress at the glacier base, $\tau_{b}$, is $\approx$ 1\,bar, which is a typical value for basal shear stress under a glacier
+  \end{beamercolorbox}
 \end{frame}
-
+   
 
 \begin{frame}{Are glacier thickness and slope related?}
   Suppose a glacier becomes thicker or steeper due to mass imbalance:
@@ -392,6 +430,11 @@
   \begin{displaymath}
     \tau = \rho\,g\,z\,\sin{\alpha} \quad \Rightarrow \quad h \sim \frac{\tau_{b}}{\rho\,g\,\sin{\alpha}}
   \end{displaymath}
+   \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+      \begin{itemize}
+       \item How are shear stress and shear strain rate (velocity) related?
+       \end{itemize}
+  \end{beamercolorbox}
 \end{frame}
 
 
@@ -399,16 +442,13 @@
   \begin{figure}
   \includegraphics[width=7cm]{figures/fig_4_04}
   \end{figure}
-  shear strain $\gamma = \frac{1}{2}\left( \frac{\Delta x}{\Delta z}\right)$
-  \begin{displaymath}
-    \dot \gamma= 1/2 \gamma
-  \end{displaymath}
-  shear strain 
-\begin{displaymath}
-\dot \gamma = 1/2\,\left( \frac{\Delta x / \Delta z}{\Delta t}\right) = 1/2\,\left( \frac{\Delta u}{\Delta z}\right)
-\end{displaymath}
+  \begin{itemize}
+  \item shear strain $\gamma = \frac{1}{2}\left( \frac{\Delta x}{\Delta z}\right) = \frac{1}{2} \gamma$
+  \item shear strain rate $\dot \gamma = 1/2\,\left( \frac{\Delta x / \Delta z}{\Delta t}\right) = 1/2\,\left( \frac{\Delta u}{\Delta z}\right)$
+  \end{itemize}
 \end{frame}
 
+\section{Material Science}
 
 \begin{frame}
   \frametitle{Material Science}
@@ -428,8 +468,6 @@
   \end{block}
 \end{frame}
 
-
-\subsection{Shear Experiment}
 
 \begin{frame}
   \frametitle{Example: Shear Experiment}
@@ -556,11 +594,11 @@
 \end{frame}
 
 
-\section{Field equations for ice flow}
+\lecture{Field equations for ice flow}{Part II}
 
 \begin{frame}
   \frametitle{General Balance Laws}
-  The flow of glacier ice can be described using concepts from classical continuum mechanis:
+  The flow of glacier ice can be described using concepts from classical continuum mechanics:
   \begin{block}{Balance Laws}
     \begin{itemize}
     \item balance of mass
@@ -571,7 +609,7 @@
   \end{block}
   \begin{block}{Material Laws / Constitutive Equations / Closures}
     \begin{itemize}
-      \item often obainted from experiments and theoretical considerations (such as material objectivity)
+      \item often obtained from experiments and theoretical considerations (such as material objectivity)
    \end{itemize}
   \end{block}
 \end{frame}
@@ -657,7 +695,7 @@
   \end{equation}
 \end{frame}
 
-\subsection{Mass Balance}
+\section{Mass Balance}
 
 \begin{frame}
   \frametitle{Mass Balance}
@@ -687,7 +725,7 @@
   \end{frame}
 
 
-\subsection{Momentum Balance}
+\section{Momentum Balance}
 
 \begin{frame}
   \frametitle{Momentum Balance}
@@ -698,11 +736,12 @@
       \frac{\text{d} \mathbf{P}}{\text{d} t} = \mathbf{F} = \underbrace{\oint_{\partial \omega} \mathbf{t}_{\mathbf{n}} \, \text{d} a}_{\text{internal}} +\underbrace{\int_{\omega} \mathbf{f} \, \text{d} v}_{\text{external}}
     \end{equation}
     \item $\mathbf{P}$ and $\mathbf{T}$ are vector quantities
-  \item identify the internal stress vector $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$, see p. 31
-  \item $\mathbf{T}$ is the \alert{Cauchy stress tensor}
-  \item external forces $\mathbf{f}$ are, e.g. gravity or the Coriolis force
-  \end{itemize}    
-\end{frame}
+    \item identify the internal stress vector $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$, see p. 31
+    \item $\mathbf{T}$ is the \alert{Cauchy stress tensor}
+    \item external forces $\mathbf{f}$ are, e.g. gravity or the Coriolis force (forces are a source of momentum)
+    \end{itemize}    
+  \end{frame}
+
 
 \begin{frame}
   \frametitle{The Cauchy Stress Tensor}
@@ -742,12 +781,8 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 
 \begin{frame}
   \frametitle{Momentum Balance}
- \begin{equation}
-   \frac{\partial \left(\rho \mathbf{v}\right)}{\partial t}  = -\nabla \cdot \left(\rho \mathbf{v}\otimes\mathbf{v}\right) + \nabla \cdot \mathbf{T} + \mathbf{f}
-  \end{equation}
-  By using the mass balance, we can write
- \begin{equation}
-    \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = -\nabla \cdot \mathbf{T} + \mathbf{f}
+  \begin{equation}
+    \frac{\partial \left(\rho \mathbf{v}\right)}{\partial t}  = -\nabla \cdot \left(\rho \mathbf{v}\otimes\mathbf{v}\right) + \nabla \cdot \mathbf{T} + \mathbf{f}
   \end{equation}
   \begin{columns}
     \column[C]{2cm}
@@ -757,10 +792,21 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
     \column[C]{6cm}
       momentum density \\
       flux of $g$ through the boundary \\
-     supply of $g$
+      supply of $g$
     \end{columns}
-\end{frame}
-
+    By using the mass balance, we can write
+    \begin{equation}
+      \frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t} = \nabla \cdot \mathbf{T} + \mathbf{f}
+    \end{equation}
+   \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+     \begin{block}{What's new?}
+       \begin{itemize}
+       \item shear stress $\tau$ replaced with Cauchy stress tensor $\mathbf{T}$
+       \end{itemize}
+     \end{block}
+   \end{beamercolorbox}
+ \end{frame}
+  
 
 \begin{frame}
   \frametitle{Momentum Balance}
@@ -768,15 +814,16 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \begin{itemize}
   \item ice is incompressible
   \item acceleration term $\frac{\text{d}\left(\rho\mathbf{v}\right)}{\text{d} t}$ can be neglected
+  \item supply of momentum is through gravity only, $\mathbf{f} = \rho \mathbf{g}$
   \end{itemize}
   \vspace{1em}
   The momentum balance for glacier flow is
   \begin{equation}
-    \nabla \cdot \mathbf{T} + \mathbf{f} = \nabla \cdot \mathbf{T} + \rho \mathbf{g} = 0
+    \nabla \cdot \mathbf{T} + \rho \mathbf{g} = 0
   \end{equation}
 \end{frame}
 
-\subsection{Angular Momentum Balance}
+\section{Angular Momentum Balance}
 
 \begin{frame}
   \frametitle{Angular Momentum Balance}
@@ -792,7 +839,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \end{frame}
 
 
-\subsection{Energy Balance}
+\section{Energy Balance}
 
 \begin{frame}
   \frametitle{Energy Balance}
@@ -868,9 +915,6 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 
 \section{Constitutive Equations}
 
-\subsection{Material Science}
-
-
 
 \begin{frame}
   \frametitle{Material Science}
@@ -910,86 +954,14 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   }
 \end{frame}
 
-\subsection{Shear Experiment}
-
-\begin{frame}
-  \frametitle{Example: Shear Experiment}
-  \begin{itemize}
-    \item apply constant shear stress $\boldsymbol{\tau}$
-\end{itemize}
-  \begin{columns}
-    \column[c]{8cm}
-    \begin{figure}
-      \includegraphics[width=6cm]{figures/fig_4_04}
-    \end{figure}
-    \column[c]{5cm}
-    $\tau$ is the applied shear stress\\
-    $\gamma$ is the shear angle\\
-    $\dot\gamma$ is the shear rate
-  \end{columns}
-  \begin{itemize}
-    \item initial elastic deformation
-    \item primary creep: shear rate $\dot\gamma$ decreases with time
-    \item \alert{secondary creep}: shear rate remains constant
-    \item acceleration phase
-    \item tertiary creep: constant shear rate (but higher) 
- \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Example: Shear Experiment}
-  \begin{columns}
-    \column[c]{8cm}
-    \begin{figure}
-      \includegraphics[width=6cm]{figures/fig_4_04}
-    \end{figure}
-    \column[c]{5cm}
-    $\tau$ is the applied shear stress\\
-    $\gamma$ is the shear angle\\
-    $\dot\gamma$ is the shear rate
-  \end{columns}
-  \vskip1em
-  This suggests that
-  \begin{itemize}
-  \item the shear rate is a function of the applied shear stress, temperature $T$, and pressure $p$
-    \begin{equation}
-      \dot\gamma = \dot\gamma\left(\tau,T,p\right)
-    \end{equation}
-   \end{itemize}
- \end{frame}
-
-
-\begin{frame}
-  \frametitle{Example: Shear Experiment}
-  \begin{columns}
-    \column[c]{8cm}
-    \begin{figure}
-      \includegraphics[width=6cm]{figures/fig_4_04}
-    \end{figure}
-    \column[c]{5cm}
-    $\tau$ is the applied shear stress\\
-    $\gamma$ is the shear angle\\
-    $\dot\gamma$ is the shear rate
-  \end{columns}
-  \vskip1em
-  \begin{itemize}
-  \item The dynamic viscosity $\eta$ relates shear stress and shear rate
-    \begin{equation}
-      \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
-    \end{equation}
-  \end{itemize}
-\end{frame}
-
-
-\subsection{Flow Relation}
 
 \begin{frame}
   \frametitle{Generalization}
   \begin{block}{Assume}
   \begin{itemize}
   \item secondary creep
-  \item incompressibility of ice, $\mathbf{T} = \underbrace{-p\mathbf{I}}_{\text{isotropic}} + \underbrace{\mathbf{T}'}_{\text{deviatoric}}$
+  \item incompressibility of ice $\Rightarrow$ uniform pressure does not lead to deformation
+    $\mathbf{T} = \underbrace{-p\mathbf{I}}_{\text{isotropic}} + \underbrace{\mathbf{T}'}_{\text{deviatoric}}$
 \item with the pressure $p=-1/3\text{tr}{\mathbf{T}}$
   \end{itemize}
 \end{block}
@@ -1034,18 +1006,27 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
     where
     \begin{equation*}
       \begin{array}{rcll}
-      A(T,p) & = & A_{0} e^{-(Q+pV)/T} &\qquad \text{Arrhenius law}\\[.25em]
+      A(T,p) & = & A_{0} e^{-Q/(RT)} &\qquad \text{Arrhenius law}\\[.25em]
       f\left(\sigma_{\text{e}}\right) & = &\sigma_{\text{e}}^{n-1} &\qquad \text{power law}
       \end{array}
     \end{equation*}
-    \begin{itemize}
-    \item $A$ is called \alert{rate factor}
-    \item $Q$ and $V$ are the activation energy and the volume, respectively
-    \item $n$ is the exponent of the flow law, usually taken as $n=3$
-    \end{itemize}
-    \vskip1em
-    This is known as \alert{Glen's flow law} or \alert{Glen-Steinemann flow law} but similar to Norton's flow law for the flow of steel at high temperatures
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Generalization}
+   \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+     We have replaced
+     \begin{equation}
+       \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
+     \end{equation}
+     by
+     \begin{equation}
+       \mathbf{T}' = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
+     \end{equation}  
+   \end{beamercolorbox}
+ \end{frame}
+
 
 \begin{frame}
   \frametitle{Calorimetric Equation of State}
@@ -1075,6 +1056,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
     \column[c]{6.5cm}
   \begin{itemize}
   \item heat flows from \alert{higher} to \alert{lower} temperature
+  \item this is the \alert{second law of thermodynamics}
  \begin{equation*}
     \mathbf{q} = -k \nabla T
   \end{equation*}
@@ -1102,7 +1084,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
     \vskip-.5em
     \begin{equation*}
       \begin{array}{lrclc}
-              \text{Glen's flow law}\quad & \mathbf{T}' & = & 2\,\eta\,\mathbf{D}  = 1/2 A(T)^{-1/n}\sigma_{\text{e}}^{1-n}\mathbf{D} \quad &(6)
+              \text{Glen's flow law}\quad & \mathbf{T}' & = & 2\,\eta\,\mathbf{D}  = A(T)^{-1/n}\sigma_{\text{e}}^{1-n}\mathbf{D} \quad &(6)
       \end{array}
     \end{equation*}
   \end{block}
@@ -1130,7 +1112,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \end{frame}
 
  
-\subsection{Scale analysis}
+\section{Scale analysis}
 
 \begin{frame}
   \frametitle{The Incompressible Navier-Stokes Equation}
@@ -1149,63 +1131,8 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \end{frame}
  
 
-\begin{frame}
-  \frametitle{Scale Analysis}
-  \begin{block}{Some typical values for an ice sheet}
-  \begin{equation*}
-  \begin{array}{rccl}
-    \text{horizontal extend} &  [L] & = & \unit{1000}\kilo\meter\\
-    \text{vertical extend} & [H] & = & \unit{1}\kilo\meter \\
-    \text{horizontal velocity} & [U] & = & \unit{100}\meter\power{a}{-1}\\
-    \text{vertical velocity} & [W] & = & \unit{0.1}\meter\power{a}{-1}\\
-    \text{pressure} & [P] & = & \rho g[H] = \unit{10}\mega\pascal\\
-    \text{time-scale} & [T] & = &[L]/[U] = 10^{4}\usk\power{a}{1}\\
-  \end{array}
-  \end{equation*}
-  \end{block}
-  The aspect ratio $\epsilon$ is defined as
-  \begin{equation*}
-    \epsilon = \frac{[H]}{[L]} = \frac{[W]}{[L]} = 10^{-3} \text{ for an ice sheet}
-  \end{equation*}
-  \begin{itemize}
-    \item The scaling argument for valley glaciers is almost the same
-  \end{itemize}
-\end{frame}
 
-
-\begin{frame}
-  \frametitle{Scale Analysis}
-  \begin{block}{Froude number}
-    The \alert{Froude number $Fr$} is the ratio of acceleration and pressure gradient. In the horizontal we have
-  \begin{equation*}
-    Fr = \frac{\rho[U]/[t]}{[P]/[L]} = \frac{\rho[U]^{2}/[L]}{\rho g [H]/[L]} = \frac{[U]^{2}}{g[H]} \approx 10^{-15}
-  \end{equation*}
-  and in the vertical
-  \begin{equation*}
-    Fr = \frac{\rho[W]/[t]}{[P]/[L]} = \frac{\rho[W]^{2}/[L]}{\rho g [H]/[L]} = \frac{[\epsilon U]^{2}}{g[H]} \approx 10^{-21}
-  \end{equation*}
-  $\Rightarrow$ The \alert{acceleration term} is \alert{negligible}
-  \end{block}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Scale Analysis}
-  \begin{block}{Rossby number}
-    The \alert{Rossby number $Ro$} is the ratio of acceleration and Coriolis force
-  \begin{equation*}
-    Ro = \frac{\rho[U]/[t]}{2\rho\Omega[U]} = \frac{\rho[U]^{2}/[L]}{2\rho\Omega[U]} = \frac{[U]}{2 \Omega [L]} \approx 2\times10^{-8}
-  \end{equation*}
-  and thus the Coriolis to pressure gradient is
-  \begin{equation*}
-   \frac{2\rho\Omega[U]}{[P]/[L]} = \frac{Fr}{Ro}\approx 5 \times 10^{-8}
-  \end{equation*}
-  $\Rightarrow$ The \alert{Coriolis term} is also \alert{negligible}
-  \end{block}
-\end{frame}
-
-
-\subsection{Stokes Equation}
+\section{Stokes Equation}
 
 
 \begin{frame}
@@ -1226,7 +1153,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \end{frame}
 
 
-\subsection{Energy Balance}
+\section{Energy Balance}
 
 \begin{frame}
   \frametitle{Temperature Equation}
@@ -1244,7 +1171,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 
 
 
-\subsection{Boundary Conditions}
+\section{Boundary Conditions}
 
 
 \begin{frame}
@@ -1469,36 +1396,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
    \item Ed Bueler's Karthaus lecture is a good starting point
    \end{itemize}
 \end{frame}
-
-
-
-\begin{frame}
-  \frametitle{Analytical Solutions}
-   \begin{itemize}
-   \item Example: gravity-driven thin film flow (p. 46\,--\,48) 
-     \begin{figure}
-       \includegraphics[width=7cm]{figures/fig_3_11}
-    \end{figure}
-   \item analytical solutions for ice sheets (Chapter~5.6)
-     \begin{itemize}
-     \item Vialov profile
-     \item Bueler profile (yes, we have in-house expert)
-     \end{itemize}
-   \end{itemize}
- \end{frame}
-    
-\begin{frame}
-  \frametitle{What's Missing?}
-  Too much to put on one slide
-   \begin{itemize}
-   \item flow of valley glaciers
-   \item ice shelves
-   \item polythermal ice
-   \item \ldots
-   \end{itemize}
-   Some topics covered in following lectures
- \end{frame}
-    
+   
 
 
 \section{Math Stuff}
