@@ -654,6 +654,27 @@ In classical mechanics, we deal with two type of equations
 \end{frame}
 
 
+\begin{frame}{Classical Mechanics}
+  \begin{block}{Densities}
+    \begin{itemize}
+    \item classical mechnics has concept of point mass
+    \item determine velocity (and acceleration) by looking at changes (and rate of changes) in position $\Rightarrow$ \alert{Kinematics}
+    \item how do forces affect a mass? $\Rightarrow$ \alert{Dynamics}
+\end{itemize}
+\end{block}
+\vspace{1em}
+Volume $\Omega$ has mass $m$, then 
+\vspace{1em}
+    \begin{equation}
+      \begin{array}{lccll}
+        \textsf{mass} \quad & m &=& \int_{\Omega} \rho\,dv, & \, \rho \quad \textsf{mass density}\\[.25em]
+        \textsf{linear momentum} \quad& mv &=& \int_{\Omega} \rho v\,dv, & \, \rho v\quad \textsf{linear momentum density} \\[.25em]
+        \textsf{internal energy} \quad & U &=& \int_{\Omega} \rho u\,dv, & \, \rho u\quad \textsf{energy density}
+      \end{array}
+    \end{equation}
+  \end{frame}
+
+
 \begin{frame}
   \frametitle{General Balance Laws}
   Imagine a volume $\Omega$ enclosed by a boundary $\partial \Omega$
@@ -774,7 +795,7 @@ In classical mechanics, we deal with two type of equations
     \begin{equation}
       \frac{\text{d} \mathbf{P}}{\text{d} t} = \mathbf{F} = \underbrace{\oint_{\partial \omega} \mathbf{t}_{\mathbf{n}} \, \text{d} a}_{\text{internal}} +\underbrace{\int_{\omega} \mathbf{f} \, \text{d} v}_{\text{external}}
     \end{equation}
-    \item $\mathbf{P}$ and $\mathbf{T}$ are vector quantities
+    \item $\mathbf{P}$ and $\mathbf{F}$ are vector quantities
     \item identify the internal stress vector $\mathbf{t}_{\mathbf{n}} = \mathbf{T}\mathbf{n}$, see p. 31
     \item $\mathbf{T}$ is the \alert{Cauchy stress tensor}
     \item external forces $\mathbf{f}$ are, e.g. gravity or the Coriolis force (forces are a source of momentum)
@@ -794,14 +815,14 @@ In classical mechanics, we deal with two type of equations
   \begin{displaymath} 
     \mathbf{T} = \left( 
       \begin{array}{ccc} 
-        t_{xx} & t_{xy} & t_{xz} \\ 
+        t_{xx} & t_{xy} & \alert{t_{xz}} \\ 
         t_{yx} & t_{yy} & t_{yz} \\ 
         t_{zx} & t_{zx} & t_{zz} 
       \end{array} 
     \right) 
   \end{displaymath}
   \begin{itemize}
-  \item We identify $\tau = t_{xy}$
+  \item We identify $\tau = t_{xz}$
   \end{itemize}
 \end{columns}
   \vskip1em
@@ -914,7 +935,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \begin{equation*}
   \begin{array}{lcclc}
     \text{mass} \quad &  \frac{\text{d} \rho}{\text{d} t} & = & -\rho\nabla \cdot \mathbf{v} \quad & (1)\\[.25em]
-    \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & -\nabla \cdot \mathbf{T} + \mathbf{f} \quad & (3) \\[.25em]
+    \text{momentum} \quad & \rho \frac{\text{d} \mathbf{v}}{\text{d} t} & = & \nabla \cdot \mathbf{T} + \mathbf{f} \quad & (3) \\[.25em]
     \text{internal energy} \quad & \rho\frac{\text{d} u}{\text{d} t} & = & - \nabla \cdot \mathbf{q} + \text{tr} \left(\mathbf{T}\cdot\mathbf{D}\right) + \rho r\quad & (1)
   \end{array}
   \end{equation*}
@@ -976,25 +997,6 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 
 
 \begin{frame}
-  \frametitle{Rheology}
-  \begin{itemize}
-    \item ask a material scientist or rheologist
-    \item and let him/her do some fancy experiments
- \end{itemize}
-  \begin{figure}
-  \includegraphics[width=7cm]{figures/fig_4_04}
-  \end{figure}
-  \note{
-    apply a constant stress (creep experiment)
-    \begin{itemize}
-    \item if the material, after some deformation, eventually resists further deformation, it is a \alert{solid}
-    \item if the material flows indefinitely, it's a \alert{liquid}
-    \end{itemize}
-  }
-\end{frame}
-
-
-\begin{frame}
   \frametitle{Generalization}
   \begin{block}{Assume}
   \begin{itemize}
@@ -1019,7 +1021,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \begin{frame}
   \frametitle{Generalization}
   \begin{equation}
-    \mathbf{T} = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
+    \mathbf{T}' = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
   \end{equation}
   is a relation between two tensors (i.e. $\mathbf{T}$ and $\mathbf{D}$)
   \begin{itemize}
@@ -1055,14 +1057,17 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
 \begin{frame}
   \frametitle{Generalization}
    \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
-     We have replaced
-     \begin{equation}
-       \tau = \eta\left(T,p,\vert \dot\gamma \vert\right)\dot\gamma
-     \end{equation}
-     by
-     \begin{equation}
-       \mathbf{T}' = \eta\left(T,p,\vert \bullet \vert\right)\mathbf{D}
-     \end{equation}  
+     \begin{block}{What's new?}
+       \vspace{1em}
+       We have replaced
+       \begin{equation}
+         \dot \gamma = \eta\left(T,p,\vert \tau \vert\right)\tau
+       \end{equation}
+       by
+       \begin{equation}
+         \mathbf{D} = \eta\left(T,p,\vert \sigma_{\sf{eff}} \vert\right)\mathbf{T}'
+       \end{equation}  
+     \end{block}
    \end{beamercolorbox}
  \end{frame}
 
@@ -1075,7 +1080,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \end{equation}
   \begin{itemize}
   \item $u_{0}$ is a reference value at a reference temperature $T_{0}$
-  \item $c$ is the heat capacity
+  \item $c$ is the heat capacity (a measure how much heat is needed to raise the temperature by a certain amount)
   \item we obtain
   \end{itemize}
   \begin{equation}
@@ -1169,6 +1174,60 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \end{block}
 \end{frame}
  
+\begin{frame}
+  \frametitle{Scale Analysis}
+  \begin{block}{Some typical values for an ice sheet}
+  \begin{equation*}
+  \begin{array}{rccl}
+    \text{horizontal extend} &  [L] & = & \unit{1000}\kilo\meter\\
+    \text{vertical extend} & [H] & = & \unit{1}\kilo\meter \\
+    \text{horizontal velocity} & [U] & = & \unit{100}\meter\power{a}{-1}\\
+    \text{vertical velocity} & [W] & = & \unit{0.1}\meter\power{a}{-1}\\
+    \text{pressure} & [P] & = & \rho g[H] = \unit{10}\mega\pascal\\
+    \text{time-scale} & [T] & = &[L]/[U] = 10^{4}\usk\power{a}{1}\\
+  \end{array}
+  \end{equation*}
+  \end{block}
+  The aspect ratio $\epsilon$ is defined as
+  \begin{equation*}
+    \epsilon = \frac{[H]}{[L]} = \frac{[W]}{[L]} = 10^{-3} \text{ for an ice sheet}
+  \end{equation*}
+  \begin{itemize}
+    \item The scaling argument for valley glaciers is almost the same
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Scale Analysis}
+  \begin{block}{Froude number}
+    The \alert{Froude number $Fr$} is the ratio of acceleration and pressure gradient. In the horizontal we have
+  \begin{equation*}
+    Fr = \frac{\rho[U]/[t]}{[P]/[L]} = \frac{\rho[U]^{2}/[L]}{\rho g [H]/[L]} = \frac{[U]^{2}}{g[H]} \approx 10^{-15}
+  \end{equation*}
+  and in the vertical
+  \begin{equation*}
+    Fr = \frac{\rho[W]/[t]}{[P]/[L]} = \frac{\rho[W]^{2}/[L]}{\rho g [H]/[L]} = \frac{[\epsilon U]^{2}}{g[H]} \approx 10^{-21}
+  \end{equation*}
+  $\Rightarrow$ The \alert{acceleration term} is \alert{negligible}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Scale Analysis}
+  \begin{block}{Rossby number}
+    The \alert{Rossby number $Ro$} is the ratio of acceleration and Coriolis force
+  \begin{equation*}
+    Ro = \frac{\rho[U]/[t]}{2\rho\Omega[U]} = \frac{\rho[U]^{2}/[L]}{2\rho\Omega[U]} = \frac{[U]}{2 \Omega [L]} \approx 2\times10^{-8}
+  \end{equation*}
+  and thus the Coriolis to pressure gradient is
+  \begin{equation*}
+   \frac{2\rho\Omega[U]}{[P]/[L]} = \frac{Fr}{Ro}\approx 5 \times 10^{-8}
+  \end{equation*}
+  $\Rightarrow$ The \alert{Coriolis term} is also \alert{negligible}
+  \end{block}
+\end{frame}
 
 
 \section{Stokes Equation}
@@ -1234,58 +1293,31 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \end{block}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Free Surface}
-  \begin{figure}
-    \includegraphics[width=4cm]{figures/fig_5_03}%
-  \end{figure}
-  \begin{itemize}
-  \item on the black-board
-  \item or p. 65\,--70 in the book
-  \item $\mathbf{w}$ and $\mathbf{v}$ are the velocity of the free surface and the ice velocity, respectively
-  \item $\mathbf{n}$ is the outward-pointing normal vector
-    \begin{equation*}
-      \mathbf{n} = \frac{\nabla F_{s}}{\vert \nabla F_{s} \vert}
-    \end{equation*}
-  \end{itemize}
-\end{frame}
 
-\begin{frame}
-  \frametitle{Kinematic Boundary Condition}
-  \begin{block}{Surface}
-    \begin{equation}
-      \frac{\partial h}{\partial t} + v_{x}\frac{\partial h}{\partial x} + v_{y}\frac{\partial h}{\partial y} - v_{z} = a_{s}
-    \end{equation}
-    \begin{itemize}
-    \item $a_{s}$ is the \alert{accumulation-ablation} function
-      \item climatic input from measurements or (melt) models
-    \end{itemize}
-  \end{block}
-  \begin{block}{Base}
-    \begin{equation}
-     \frac{\partial b}{\partial t} + v_{x}\frac{\partial b}{\partial x} + v_{y}\frac{\partial b}{\partial y} - v_{z} = a_{b}
-    \end{equation}
-    \begin{itemize}
-    \item $a_{b}$ is the \alert{basal melt rate}
-      \item often $\partial b/\partial t = 0$
-    \end{itemize}
-  \end{block}
-\end{frame}
 
 \begin{frame}
   \frametitle{Ice-Thickness Equation}
-  By combining the basal and surface kinematical equation we can obtain
-  \begin{equation}
-    \frac{\partial H}{\partial t} = - \nabla \cdot \mathbf{Q} + a_{s} - a_{b}
-  \end{equation}
-    \begin{itemize}
-    \item $ a_{s}$ and $a_{b}$ are in the vertical direction
-    \item the volume flux $\mathbf{Q}$ is defined as
-      \begin{equation*}
-        \mathbf{Q} =
-        \left(
-          \begin{array}{c}
-            \int_{b}^{h} v_{x} \,\text{d} z \\[.25em]
+      \begin{beamercolorbox}[rounded=true,shadow=true]{boxed}
+        \begin{eqnarray} \notag
+     \frac{\partial H}{\partial t} &=& (\mathbf{q}_{\sf{in}} - \mathbf{q}_{\sf{out}}) + a_{s} - a_{b} \\[.5em]
+      &=& - \nabla \cdot \mathbf{Q} + a_{s} - a_{b}
+    \end{eqnarray}
+  \end{beamercolorbox}
+\begin{itemize}
+  \item $ a_{s}$ and $a_{b}$ are in the vertical direction
+  \item the volume flux $\mathbf{Q}$ is defined as
+    \begin{equation*}
+      \mathbf{Q} = 
+      \left(
+        \begin{array}{c}
+          Q_x \\[.25em]
+          Q_y
+        \end{array}
+      \right)
+      =
+      \left(
+        \begin{array}{c}
+          \int_{b}^{h} v_{x} \,\text{d} z \\[.25em]
           \int_{b}^{h} v_{y} \,\text{d} z
         \end{array}
       \right)
@@ -1438,7 +1470,9 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
    
 
 
-\section{Math Stuff}
+\appendix
+
+\section{{Math Stuff}}
 
 \begin{frame}
   \frametitle{Basics and Notation}
@@ -1507,7 +1541,7 @@ $    \mathbf{t}_{\mathbf{e}_{z}} =
   \vskip-.25em
   \begin{block}{Divergence Theorem}
     \begin{equation}
-      \oint_{\partial \omega} \boldsymbol{\phi} \,\text{d}a = 
+      \oint_{\partial \omega} \boldsymbol{\phi}\cdot \mathbf{n} \,\text{d}a = 
       \int_{\omega} \nabla \cdot \boldsymbol{\phi} \, \text{d} v
     \end{equation}
       \begin{itemize}
