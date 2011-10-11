@@ -2,7 +2,7 @@
 
 \mode<presentation>
 {
-  \usetheme[headline,footline]{UAFshade}
+  \usetheme[footline]{UAFshade}
   \setbeamercovered{transparent}
 }
 
@@ -12,7 +12,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{multimedia}
-%\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
 % Some useful commands (from ELB)
 \newcommand{\bD}{\mathbf{D}}
@@ -49,6 +50,13 @@
 \newcommand{\unit}[1]{\ensuremath{\,\text{#1}}}
 
 
+\usetikzlibrary{shadows}
+
+\newenvironment{transbox}{%
+\begin{tikzpicture}
+\node[drop shadow,rounded corners,text width=\textwidth,fill=white, fill opacity=0.75,text opacity=1] \bgroup
+}{
+\egroup;\end{tikzpicture}} 
 
 
 % title page
@@ -90,10 +98,20 @@
 }
 
 
+\setbeamertemplate{background canvas}
+  {
+     \tikz{\node[inner sep=0pt,opacity=1.0] {\includegraphics[width=\paperwidth]{uaf_beamer_shade_bg}};}
+} 
+
 % insert titlepage
 \begin{frame}
   \titlepage
 \end{frame}
+
+\setbeamertemplate{background canvas}
+{
+%
+} 
 
 
 
@@ -233,10 +251,10 @@
 \begin{frame}
   \frametitle{Temperature equation}
   \begin{columns}
-    \column[c]{1.75cm} 
+    \column[T]{1.75cm} 
     \vspace{1cm}
     {\includegraphics<1>[width=1.5cm]{figures/glaciersv_c}}%
-    \column[c]{10.25cm}
+    \column[T]{10.25cm}
     \begin{block}{Temperature equation}
       \begin{itemize}
         \item ice is cold if a change in heat content leads to a change in temperature alone
@@ -266,20 +284,20 @@
 \begin{frame}
   \frametitle{Thermal properties}
   \begin{columns}
-    \column[c]{1.75cm} 
+    \column[T]{1.75cm} 
     \vspace{1cm}
     {\includegraphics<1>[width=1.5cm]{figures/glaciersv_c}}%
-    \column[c]{10.25cm}
-    \begin{columns}
-      \column[c]{5.5cm} 
+    \column[T]{10.25cm}
+   \begin{columns}
+      \column[T]{5.5cm} 
       \includegraphics[5.cm]{figures/c}
-      \column[c]{4cm}
+      \column[T]{4cm}
       \alert{heat capacity} is a monotonically-increasing function of temperature
     \end{columns}  
     \begin{columns}
-      \column[c]{5.5cm} 
+      \column[T]{5.5cm} 
       \includegraphics[5cm]{figures/k}
-      \column[c]{4cm}
+      \column[T]{4cm}
       \alert{thermal conductivity} is a monotonically-decreasing function of temperature
     \end{columns}  
   \end{columns}  
@@ -295,7 +313,6 @@
     \column[T]{1.75cm} 
     \vspace{1cm}
     {\includegraphics<1>[width=1.5cm]{figures/glaciersv_c}}%
-    \vspace{2.5cm}
     \column[T]{10.25cm}
      Viscosity $\eta$ is a function of effective strain rate $d_{\text e}$  and temperature $T$
       \begin{equation*}
@@ -315,8 +332,7 @@
     \column[T]{1.75cm} 
     \vspace{1cm}
     {\includegraphics<1>[width=1.5cm]{figures/glaciersv_c}}%
-    \vspace{2.5cm}
-    \column[T]{10.25cm}
+   \column[T]{10.25cm}
       % \begin{equation*}
       %   \label{eq:cold_pde}
       %   \rho c(T)\left(\ddt{T} + {\bf v}\cdot\nabla T\right) =  - \nabla \cdot {\bf q} + Q
@@ -343,8 +359,7 @@
     \column[T]{1.75cm} 
     \vspace{1cm}
     {\includegraphics<1>[width=1.5cm]{figures/glaciersv_c}}%
-    \vspace{2.5cm}
-    \column[T]{10.25cm}
+   \column[T]{10.25cm}
     \begin{block}{Boundary Conditions}
       \begin{align*}
         \label{eq:heat-flow-1d-bound}
@@ -688,6 +703,28 @@
 \end{frame}
 
 
+\begin{frame}
+ \frametitle{Alaskan-type thermal structure}
+  \begin{columns}
+    \column[T]{1.75cm} 
+    \vspace{1cm}
+    {\includegraphics[width=1.5cm]{figures/glaciersv_p}}%
+    \vspace{2.5cm}
+    \column[T]{5cm}
+    \begin{figure}
+      \includegraphics<1>[height=3cm]{figures/alessio_radar}
+    \\
+     \includegraphics<1>[width=4cm]{figures/Kah_CSL_100MHZ}
+   \end{figure}
+    \column[T]{5cm}
+    \begin{figure}
+    \includegraphics<1>[height=3cm]{figures/kahiltna_group}
+     \\[2em]
+    Field work 2011 on Kahiltna Glacier, Denali
+    \end{figure}
+ \end{columns}
+\end{frame}
+
 
 \section{Ice Sheet Models}
 
@@ -711,32 +748,20 @@
 
 \begin{frame}
   \frametitle{Thermodynamics in ice sheet models}
-  \begin{block}{Cold vs Polythermal for Greenland}
-  \begin{itemize}
-     \item thinner temperate layer
-     \item but difference in total ice volume for steady-state run is $< 1\%$ (Greve, 1995)
-     \item SO WHAT?
-     \item better conservation of energy
-     \item more realistic basal melt rates
-     \item temperate basal ice means ice is sliding at the base
-     \item new areas may become temperate
-     \end{itemize}
-   \end{block}	
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Simulated basal melt rates}
- \begin{columns}
-    \column[c]{4.5cm}
-   \centering 
-    cold-ice method
-    \includegraphics[width=4.25cm]{figures/bmelt_temp}%
-   \column[c]{4.5cm}
+  \begin{columns}
+    \column[c]{5.5cm}
+    \begin{block}{Cold vs Polythermal}
+      \begin{itemize}
+      \item better conservation of energy
+      \item more realistic basal melt rates
+      \item more realistic ice streams
+      \end{itemize}
+    \end{block}	
+    \column[c]{5.5cm}
     \centering
-    polythermal
-    \includegraphics[width=4.25cm]{figures/bmelt_enth}%
- \end{columns}
+    \includegraphics<1>[width=5cm]{figures/bmelt_temp}%
+    \includegraphics<2>[width=5cm]{figures/bmelt_enth}%
+  \end{columns}
 \end{frame}
 
 \end{document}
